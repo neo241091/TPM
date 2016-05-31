@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.web.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="709.0" prefWidth="1023.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxapplication2.ResultController">
+   <children>
+      <Label layoutX="171.0" layoutY="34.0" text="Summary">
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font>
+      </Label>
+      <Button layoutX="925.0" layoutY="633.0" mnemonicParsing="false" onAction="#handleresulthelp" text="Help" />
+      <Button layoutX="856.0" layoutY="633.0" mnemonicParsing="false" onAction="#handleresultclose" text="Close" />
+      <Button layoutX="794.0" layoutY="633.0" mnemonicParsing="false" onAction="#handleresultback" text="Back" />
+      <CheckBox layoutX="39.0" layoutY="638.0" mnemonicParsing="false" text="Save current input values" />
+      <Button layoutX="912.0" layoutY="27.0" mnemonicParsing="false" text="Print" />
+      <Button layoutX="778.0" layoutY="27.0" mnemonicParsing="false" text="Export to Excel" />
+      <WebView fx:id="webengine" layoutX="171.0" layoutY="68.0" prefHeight="539.0" prefWidth="709.0" />
+      <Hyperlink layoutX="33.0" layoutY="358.0" onAction="#handleResultslink" text="Results">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink layoutX="33.0" layoutY="288.0" onAction="#handleObjectiveslink" text="Objective">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink layoutX="27.0" layoutY="222.0" onAction="#handleTimeValuelink" text="Value of Time">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink layoutX="27.0" layoutY="149.0" onAction="#handleUserlink" text="User Info">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink layoutX="27.0" layoutY="87.0" onAction="#handleFacilitylink" prefHeight="29.0" prefWidth="119.0" text="Facility Info">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Hyperlink>
+   </children>
+</AnchorPane>
