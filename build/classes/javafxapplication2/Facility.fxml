@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="743.0" prefWidth="1009.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxapplication2.FacilityController">
+   <children>
+  <Accordion layoutX="14.0" layoutY="32.0" />
+      <Label layoutX="185.0" layoutY="15.0" text="Facility Information">
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font>
+      </Label>
+      <Label layoutX="185.0" layoutY="49.0" text="Please select the speed-flow model to be utilized in the simulation program.">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="185.0" layoutY="108.0" text="Please enter the ML and GP lane configuration in the boxes below." />
+      <ComboBox fx:id="ModelDropDown" layoutX="185.0" layoutY="75.0" prefWidth="150.0" visibleRowCount="3">
+           <items>
+        <FXCollections fx:factory="observableArrayList">
+            <String fx:value="Drake" />
+            <String fx:value="Greenshield" />
+            <String fx:value="Underwood" />
+        </FXCollections>
+    </items>
+     <value>
+        <String fx:value="Drake" />
+    </value>
+      </ComboBox>
+      <TabPane layoutX="185.0" layoutY="129.0" prefHeight="272.0" prefWidth="571.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab closable="false" text="General Purpose Lanes">
+            <content>
+              <AnchorPane centerShape="false" minHeight="0.0" minWidth="0.0" prefHeight="205.0" prefWidth="571.0" scaleShape="false">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" text="Number of Lanes" />
+                        <TextField fx:id="GpSpeed" layoutX="169.0" layoutY="50.0" text="80" />
+                        <Label layoutX="14.0" layoutY="55.0" text="Free Flow Speed" />
+                        <Label layoutX="14.0" layoutY="97.0" text="Capacity Per Lane" />
+                        <TextField fx:id="GPCapacity" layoutX="169.0" layoutY="92.0" text="2200" />
+                        <Label layoutX="14.0" layoutY="137.0" text="Corridor Length" />
+                        <TextField fx:id="GPLength" layoutX="169.0" layoutY="132.0" text="1.0" />
+                        <Label layoutX="14.0" layoutY="184.0" text="Jam Density" />
+                        <TextField fx:id="GPDensity" layoutX="169.0" layoutY="179.0" text="120" />
+                        <Label layoutX="363.0" layoutY="14.0" text="Lanes" />
+                        <Label layoutX="365.0" layoutY="55.0" text="mph" />
+                        <Label layoutX="363.0" layoutY="97.0" text="pcphpl" />
+                        <Label layoutX="365.0" layoutY="137.0" text="Miles" />
+                        <Label layoutX="363.0" layoutY="184.0" text="pcpmp" />
+                        <TextField fx:id="GPNoLanes" layoutX="169.0" layoutY="9.0" text="4" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <TabPane layoutX="194.0" layoutY="401.0" prefHeight="272.0" prefWidth="571.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab closable="false" text="Managed Lanes">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="205.0" prefWidth="571.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" text="Number of Lanes" />
+                        <TextField fx:id="MLNoLanes" layoutX="169.0" layoutY="9.0" text="2" />
+                        <TextField fx:id="MLSpeed" layoutX="169.0" layoutY="50.0" text="80" />
+                        <Label layoutX="14.0" layoutY="55.0" text="Free Flow Speed" />
+                        <Label layoutX="14.0" layoutY="97.0" text="Capacity Per Lane" />
+                        <TextField fx:id="MLCapacity" layoutX="169.0" layoutY="92.0" text="2200" />
+                        <Label layoutX="14.0" layoutY="137.0" text="Corridor Length" />
+                        <TextField fx:id="MLLength" layoutX="169.0" layoutY="132.0" text="1.0" />
+                        <Label layoutX="14.0" layoutY="184.0" text="Jam Density" />
+                        <TextField fx:id="MLDensity" layoutX="169.0" layoutY="179.0" text="120" />
+                        <Label layoutX="363.0" layoutY="14.0" text="Lanes" />
+                        <Label layoutX="365.0" layoutY="55.0" text="mph" />
+                        <Label layoutX="363.0" layoutY="97.0" text="pcphpl" />
+                        <Label layoutX="365.0" layoutY="137.0" text="Miles" />
+                        <Label layoutX="363.0" layoutY="184.0" text="pcpmp" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+      <Button fx:id="FacilityNextButton" layoutX="751.0" layoutY="682.0" mnemonicParsing="false" onAction="#handleFacilityNextButtonAction" text="Next" />
+      <Button layoutX="819.0" layoutY="682.0" mnemonicParsing="false" onAction="#handleFacilityclose" text="Close" />
+      <Button layoutX="893.0" layoutY="682.0" mnemonicParsing="false" text="Help" />
+      <CheckBox layoutX="24.0" layoutY="687.0" mnemonicParsing="false" text="Save current input values" />
+      <Button layoutX="893.0" layoutY="17.0" mnemonicParsing="false" text="Print" />
+      <Hyperlink layoutX="37.0" layoutY="101.0" onAction="#handleFacilitylink" prefHeight="29.0" prefWidth="119.0" text="Facility Info">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink layoutX="37.0" layoutY="163.0" onAction="#handleUserlink" text="User Info">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink layoutX="37.0" layoutY="236.0" onAction="#handleTimeValuelink" text="Value of Time">
+          <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink layoutX="43.0" layoutY="302.0" onAction="#handleObjectiveslink" text="Objective">
+          <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink layoutX="43.0" layoutY="372.0" onAction="#handleResultslink" text="Results">
+          <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Hyperlink>
+ </children>
+</AnchorPane>
