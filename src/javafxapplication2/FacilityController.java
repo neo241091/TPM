@@ -33,7 +33,7 @@ public class FacilityController implements Initializable {
     private ComboBox ModelDropDown;
     
     @FXML
-    private TextField MLNoLanes,GPNoLanes,GpSpeed,GPLength,MLSpeed,GPCapacity,MLCapacity,MLLength;
+    private TextField MLNoLanes,GPNoLanes,GpSpeed,GPLength,MLSpeed,GPCapacity,MLCapacity,MLLength,MLDensity;
     
             
     @Override
@@ -48,6 +48,7 @@ public class FacilityController implements Initializable {
         Singleton.getInstance().setGPCapacity(GPCapacity);
         Singleton.getInstance().setMLCapacity(MLCapacity);
         Singleton.getInstance().setMLLength(MLLength);
+        Singleton.getInstance().setMLDensity(MLDensity);
     }    
 
     @FXML

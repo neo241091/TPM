@@ -30,7 +30,7 @@ import javafx.stage.Stage;
 public class TimeValueController implements Initializable {
     DecimalFormat twoDForm = new DecimalFormat("#.##");
     @FXML
-    private TextField Maxtoll8;
+    private TextField Maxtoll8,Maxtoll1,Maxtoll2,Maxtoll3,Maxtoll4,Maxtoll5,Maxtoll6,Maxtoll7;
     @FXML
     private TextField Maxtoll9;
     @FXML
@@ -122,6 +122,16 @@ public class TimeValueController implements Initializable {
         spvtime7.textProperty().addListener((observable, oldValue, newValue) -> spvtimeListener(newValue));
         spvtime8.textProperty().addListener((observable, oldValue, newValue) -> spvtimeListener(newValue));
         spvtime9.textProperty().addListener((observable, oldValue, newValue) -> spvtimeListener(newValue));
+        Singleton.getInstance().setMaxtoll1(Maxtoll1);
+        Singleton.getInstance().setMaxtoll2(Maxtoll2);
+        Singleton.getInstance().setMaxtoll3(Maxtoll3);
+        Singleton.getInstance().setMaxtoll4(Maxtoll4);
+        Singleton.getInstance().setMaxtoll5(Maxtoll5);
+        Singleton.getInstance().setMaxtoll6(Maxtoll6);
+        Singleton.getInstance().setMaxtoll7(Maxtoll7);
+        Singleton.getInstance().setMaxtoll8(Maxtoll8);
+        Singleton.getInstance().setMaxtoll9(Maxtoll9);
+        Singleton.getInstance().setMaxtoll10(Maxtoll10);
     }    
     
     private void tollListener(String searchText) {

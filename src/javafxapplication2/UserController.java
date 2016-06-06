@@ -28,7 +28,10 @@ import javafx.stage.Stage;
 public class UserController implements Initializable {
 
     @FXML
-    private TextField corridordemand,deadsetter;
+    private TextField corridordemand,deadsetter,sovvhmix,hovvhmix,sovtvhmix,sutvhmix,sttvhmix,stdvhmix,sphvhmix;
+    
+    @FXML 
+    private TextField sovpce,hovpce,sovtpce,sutpce,sttpce,stdpce,sphpce;
     
     @FXML
     private TextField sovmlshare,hovmlshare,sovtmlshare,sutmlshare,sttmlshare,stdmlshare,spvmlshare;
@@ -47,6 +50,27 @@ public class UserController implements Initializable {
         // TODO
         Singleton.getInstance().setcorridordemand(corridordemand);
         Singleton.getInstance().setdeadsetter(deadsetter);
+        Singleton.getInstance().setsovvhmix(sovvhmix);
+        Singleton.getInstance().sethovvhmix(hovvhmix);
+        Singleton.getInstance().setsovtvhmix(sovtvhmix);
+        Singleton.getInstance().setsutvhmix(sutvhmix);
+        Singleton.getInstance().setsttvhmix(sttvhmix);
+        Singleton.getInstance().setstdvhmix(stdvhmix);
+        Singleton.getInstance().setsphvhmix(sphvhmix);
+        Singleton.getInstance().setsovpce(sovpce);
+        Singleton.getInstance().sethovpce(hovpce);
+        Singleton.getInstance().setsovtpce(sovtpce);
+        Singleton.getInstance().setsutpce(sutpce);
+        Singleton.getInstance().setsttpce(sttpce);
+        Singleton.getInstance().setstdpce(stdpce);
+        Singleton.getInstance().setsphpce(sphpce);
+        Singleton.getInstance().setsovtoll(sovtoll);
+        Singleton.getInstance().sethovtoll(hovtoll);
+        Singleton.getInstance().setsovttoll(sovttoll);
+        Singleton.getInstance().setsuttoll(suttoll);
+        Singleton.getInstance().setstttoll(stttoll);
+        Singleton.getInstance().setstdtoll(stdtoll);
+        Singleton.getInstance().setspvtoll(spvtoll);
     }    
     
     @FXML
