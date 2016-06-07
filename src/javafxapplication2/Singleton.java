@@ -20,7 +20,7 @@ public class Singleton {
      private TextField speedtextsing,tolltextsing,corridordemand,MLNoLanes,GPNoLanes,GPLength,GpSpeed,
              MLSpeed,GPCapacity,MLCapacity,MLLength,deadsetter,sovvhmix,hovvhmix,sovtvhmix,sutvhmix,
              sttvhmix,stdvhmix,sphvhmix,sovpce,hovpce,sovtpce,sutpce,sttpce,stdpce,sphpce,
-             sovtoll,hovtoll,sovttoll,suttoll,stttoll,stdtoll,spvtoll;
+             sovtoll,hovtoll,sovttoll,suttoll,stttoll,stdtoll,spvtoll,GPDensity;
      
      private TextField Maxtoll1,Maxtoll2,Maxtoll3,Maxtoll4,Maxtoll5,Maxtoll6,Maxtoll7,Maxtoll8,Maxtoll9,Maxtoll10;
      private TextField MLDensity;
@@ -395,5 +395,13 @@ public class Singleton {
 
         public void setMLDensity(TextField txtField2) {
            this.MLDensity = txtField2;
+        }
+        
+        public TextField getGPDensity() {
+            return GPDensity;
+        }
+
+        public void setGPDensity(TextField txtField2) {
+           this.GPDensity = txtField2;
         }
 }

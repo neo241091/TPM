@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 package javafxapplication2;
+import java.util.*;
 
-import java.awt.Insets;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
@@ -16,7 +16,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -27,10 +26,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.RadioButton;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBoxBuilder;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -46,6 +43,11 @@ public class ResultController implements Initializable {
     DecimalFormat f = new DecimalFormat("##.00");
     @FXML 
     private WebView webengine;
+    
+    Lane FinalVolume = new Lane();
+    Lane FinalSpeed = new Lane();
+    Lane FinalSpeed_Output = new Lane();
+    HashMap<vehType, DataPoint> data = new HashMap<vehType,DataPoint>();
     
     private void MessageBox(String msg) throws IOException
     {
@@ -908,7 +910,7 @@ public class ResultController implements Initializable {
         
         Toll = Double.parseDouble(Singleton.getInstance().gettolltextsing().getText());        
         
-        StringBuilder html = new StringBuilder();
+        String html = new String();
         NoML = Integer.parseInt(Singleton.getInstance().getMLNoLanes().getText());
         NoGP = Integer.parseInt(Singleton.getInstance().getGPNoLanes().getText());
         Length_GP = Double.parseDouble(Singleton.getInstance().getGPLength().getText());
@@ -918,7 +920,7 @@ public class ResultController implements Initializable {
         CapGP = Double.parseDouble(Singleton.getInstance().getGPCapacity().getText());
         CapML = Double.parseDouble(Singleton.getInstance().getMLCapacity().getText());
         DeadSetter = Double.parseDouble(Singleton.getInstance().getdeadsetter().getText());
-        html.append("<style>" +
+        html += ("<style>" +
                 ".l {text-align: left}" +
                 ".c {text-align: center}" +
                 ".r {text-align: right}" +
@@ -934,38 +936,54 @@ public class ResultController implements Initializable {
                 "th, td {padding-left: 15px; padding-right: 10px; white-space: nowrap; font-family: verdana; font-size: 12px;}" +
                 ".alternating {background-color: #93DEF0}" +
                 "</style>");
-        html.append("<table><caption>Volume Split between ML and GPL, Toll Scenario ");
+        html+=("<table><caption>Volume Split between ML and GPL, Toll Scenario ");
         
         
         if (tollradio.isSelected())
         {
-            html.append("1</caption><tr><td>Objective: SOV toll value per mile: $").append(f.format(Toll)).append("</td></tr>");
+            html+=("1</caption><tr><td>Objective: SOV toll value per mile: $");
+            html+=(f.format(Toll));
+            html+=("</td></tr>");
         }
         else if (speedradio.isSelected())
         {
-            html.append("2</caption><tr><td>Objective: Min desired speed on ML: ").append(f.format(speedobj)).append(" mph</td></tr>");
+            html+=("2</caption><tr><td>Objective: Min desired speed on ML: ");
+            html+=(f.format(speedobj));
+            html+=(" mph</td></tr>");
         }
         if(ModelDropDown.getValue().equals("Drake"))
         {
-            html.append("<tr><td>Speed-flow model: Drake" + "</td></tr>");
+            html+=("<tr><td>Speed-flow model: Drake" + "</td></tr>");
         }
         else if(ModelDropDown.getValue().equals("Greenshield"))
         {
-            html.append("<tr><td>Speed-flow model: Greenshield" + "</td></tr>");
+            html+=("<tr><td>Speed-flow model: Greenshield" + "</td></tr>");
         }
         else if(ModelDropDown.getValue().equals("Underwood"))
         {
-            html.append("<tr><td>Speed-flow model: Underwood" + "</td></tr>");
+            html+=("<tr><td>Speed-flow model: Underwood" + "</td></tr>");
         }
-        html.append("<tr><td>Corridor Demand: ").append(corridordemand).append(" vph</td></tr>");
-        html.append("<tr><td>Number of Managed Lanes: ").append(NoML).append(" lanes</td></tr>");
-        html.append("<tr><td>Length of Managed Lane corridor: ").append(NoGP).append(" miles</td></tr>");
-        html.append("<tr><td>Length of General Purpose Lane corridor: ").append(Length_GP).append(" miles</td></tr>");
-        html.append("<tr><td>Free Flow Speed on General Purpose Lane: ").append(Uf_GP).append(" mph</td></tr>");
-        html.append("<tr><td>Free Flow Speed on Managed Lane: ").append(Uf_ML).append(" mph</td></tr>");
-        html.append("</table><br>");
+        html+=("<tr><td>Corridor Demand: ");
+        html+=(corridordemand);
+        html+=(" vph</td></tr>");
+        html+=("<tr><td>Number of Managed Lanes: ");
+        html+=(NoML);
+        html+=(" lanes</td></tr>");
+        html+=("<tr><td>Length of Managed Lane corridor: ");
+        html+=(NoGP);
+        html+=(" miles</td></tr>");
+        html+=("<tr><td>Length of General Purpose Lane corridor: ");
+        html+=(Length_GP);
+        html+=(" miles</td></tr>");
+        html+=("<tr><td>Free Flow Speed on General Purpose Lane: ");
+        html+=(Uf_GP);
+        html+=(" mph</td></tr>");
+        html+=("<tr><td>Free Flow Speed on Managed Lane: ");
+        html+=(Uf_ML);
+        html+=(" mph</td></tr>");
+        html+=("</table><br>");
         
-        html.append("<div align='left'><table cellspacing='0'>" +
+        html+=("<div align='left'><table cellspacing='0'>" +
             "<caption>VOLUME AND TOLL SUMMARY:</caption><thead><tr>" +
             "<th class='l'>Vehicle Class</th>" +
             "<th class='c'>VolumeML (vph)</th>" +
@@ -1059,14 +1077,125 @@ public class ResultController implements Initializable {
         VOT8 = Double.parseDouble(Singleton.getInstance().getMaxtoll8().getText());
         VOT9 = Double.parseDouble(Singleton.getInstance().getMaxtoll9().getText());
         VOT10 = Double.parseDouble(Singleton.getInstance().getMaxtoll10().getText());
+        data = CreateBlankDatabase();
         if(tollradio.isSelected() && QcGP == 0)
         {
             VolGP = 0;
             VolML = Demand_Adj;
             ChooseModelOptionForML();
             Toll_Copy = Toll;            
+            FinalVolume.setGP(VolGP);
+            FinalVolume.setML(VolML);
+            FinalSpeed.setGP(1);
+            FinalSpeed.setML(uML);
+            FinalSpeed_Output.setGP(0);
+            FinalSpeed_Output.setML(uML);
+
+           data.get(vehType.SOV).getVolume().setGP(Math.round(Demand * (PMxVeh_SOV / 100) * (TCapGP / (TCapGP + TCapML)) + VolBase_SOV));
+           data.get(vehType.RHOV_M).getVolume().setGP(Math.round(Demand * (PMxVeh_RHOV_M / 100) * (TCapGP / (TCapGP + TCapML)) + VolBase_RHOV_M));
+           data.get(vehType.SOV_T).getVolume().setGP(Math.round(Demand * (PMxVeh_SOV_T / 100) * (TCapGP / (TCapGP + TCapML))));
+           data.get(vehType.LTr).getVolume().setGP(Math.round(Demand * (PMxVeh_LTr / 100) * (TCapGP / (TCapGP + TCapML))));
+           data.get(vehType.ELTr).getVolume().setGP(Math.round(Demand * (PMxVeh_ELTr / 100) * (TCapGP / (TCapGP + TCapML))));
+           data.get(vehType.ELTr_T2).getVolume().setGP(Math.round(Demand * (PMxVeh_ELTr_T2 / 100) * (TCapGP / (TCapGP + TCapML))));
+           data.get(vehType.SpVeh).getVolume().setGP(Math.round(Demand * (PMxVeh_SpVeh / 100) * (TCapGP / (TCapGP + TCapML))));
+           data.get(vehType.Total).getVolume().setGP(Math.round(Demand * (TCapGP / (TCapGP + TCapML))));
+
+           data.get(vehType.SOV).getVolume().setML(Math.round(Demand * (PMxVeh_SOV / 100) * (TCapML / (TCapGP + TCapML))));
+           data.get(vehType.RHOV_M).getVolume().setML(Math.round(Demand * (PMxVeh_RHOV_M / 100) * (TCapML / (TCapGP + TCapML))));
+           data.get(vehType.SOV_T).getVolume().setML(Math.round(Demand * (PMxVeh_SOV_T / 100) * (TCapML / (TCapGP + TCapML))));
+           data.get(vehType.LTr).getVolume().setML(Math.round(Demand * (PMxVeh_LTr / 100) * (TCapML / (TCapGP + TCapML))));
+           data.get(vehType.ELTr).getVolume().setML(Math.round(Demand * (PMxVeh_ELTr / 100) * (TCapML / (TCapGP + TCapML))));
+           data.get(vehType.ELTr_T2).getVolume().setML(Math.round(Demand * (PMxVeh_ELTr_T2 / 100) * (TCapML / (TCapGP + TCapML))));
+           data.get(vehType.SpVeh).getVolume().setML(Math.round(Demand * (PMxVeh_SpVeh / 100) * (TCapML / (TCapGP + TCapML))));
+           data.get(vehType.Total).getVolume().setML(Math.round(Demand * (TCapML / (TCapGP + TCapML))));
         }
-        content.loadContent(html.toString());
+        else if(tollradio.isSelected() && QcML == 0)
+        {
+            //Toll objective
+                VolGP = Demand_Adj;
+                VolML = 0;
+                //Choose the Q-K-U model to calculate speed
+                ChooseModelOptionForGP();
+
+                //for fixing the overwriting problem
+                Toll_Copy = Toll;
+                Toll = Toll_Copy;
+
+                // prepare the outputs
+                FinalVolume.setGP(VolGP);
+                FinalVolume.setML(VolML);
+                FinalSpeed.setGP(uGP);
+                FinalSpeed.setML(1);
+
+                //for answer in HTML only - overwrite FinalSpeed.ML
+                FinalSpeed_Output.setGP(uGP);
+                FinalSpeed_Output.setML(0);
+
+                data.get(vehType.SOV).getVolume().setGP(Math.round(Demand * (PMxVeh_SOV / 100) * (TCapGP / (TCapGP + TCapML))));
+                data.get(vehType.RHOV_M).getVolume().setGP(Math.round(Demand * (PMxVeh_RHOV_M / 100) * (TCapGP / (TCapGP + TCapML))));
+                data.get(vehType.SOV_T).getVolume().setGP(Math.round(Demand * (PMxVeh_SOV_T / 100) * (TCapGP / (TCapGP + TCapML))));
+                data.get(vehType.LTr).getVolume().setGP(Math.round(Demand * (PMxVeh_LTr / 100) * (TCapGP / (TCapGP + TCapML))));
+                data.get(vehType.ELTr).getVolume().setGP(Math.round(Demand * (PMxVeh_ELTr / 100) * (TCapGP / (TCapGP + TCapML))));
+                data.get(vehType.ELTr_T2).getVolume().setGP(Math.round(Demand * (PMxVeh_ELTr_T2 / 100) * (TCapGP / (TCapGP + TCapML))));
+                data.get(vehType.SpVeh).getVolume().setGP(Math.round(Demand * (PMxVeh_SpVeh / 100) * (TCapGP / (TCapGP + TCapML))));
+                data.get(vehType.Total).getVolume().setGP(Math.round(Demand * (TCapGP / (TCapGP + TCapML))));
+
+                data.get(vehType.SOV).getVolume().setML(Math.round(Demand * (PMxVeh_SOV / 100) * (TCapML / (TCapGP + TCapML))));
+                data.get(vehType.RHOV_M).getVolume().setML(Math.round(Demand * (PMxVeh_RHOV_M / 100) * (TCapML / (TCapGP + TCapML))));
+                data.get(vehType.SOV_T).getVolume().setML(Math.round(Demand * (PMxVeh_SOV_T / 100) * (TCapML / (TCapGP + TCapML))));
+                data.get(vehType.LTr).getVolume().setML(Math.round(Demand * (PMxVeh_LTr / 100) * (TCapML / (TCapGP + TCapML))));
+                data.get(vehType.ELTr).getVolume().setML(Math.round(Demand * (PMxVeh_ELTr / 100) * (TCapML / (TCapGP + TCapML))));
+                data.get(vehType.ELTr_T2).getVolume().setML(Math.round(Demand * (PMxVeh_ELTr_T2 / 100) * (TCapML / (TCapGP + TCapML))));
+                data.get(vehType.SpVeh).getVolume().setML(Math.round(Demand * (PMxVeh_SpVeh / 100) * (TCapML / (TCapGP + TCapML))));
+                data.get(vehType.Total).getVolume().setML(Math.round(Demand * (TCapML / (TCapGP + TCapML))));
+        }
+        else if (tollradio.isSelected() && Toll > 0)
+        {
+            
+        }
+        FinalVolume.setGP(data.get(vehType.SpVeh).getVolume().getGP() * PCE_SpVeh + data.get(vehType.ELTr_T2).getVolume().getGP() * PCE_ELTr_T2 + data.get(vehType.ELTr).getVolume().getGP() * PCE_ELTr + data.get(vehType.LTr).getVolume().getGP() * PCE_LTr + data.get(vehType.SOV_T).getVolume().getGP() * PCE_SOV_T + data.get(vehType.RHOV_M).getVolume().getGP() * PCE_RHOV_M + data.get(vehType.SOV).getVolume().getGP() * PCE_SOV);
+        FinalVolume.setML(data.get(vehType.SpVeh).getVolume().getML() * PCE_SpVeh + data.get(vehType.ELTr_T2).getVolume().getML() * PCE_ELTr_T2 + data.get(vehType.ELTr).getVolume().getML() * PCE_ELTr + data.get(vehType.LTr).getVolume().getML() * PCE_LTr + data.get(vehType.SOV_T).getVolume().getML() * PCE_SOV_T + data.get(vehType.RHOV_M).getVolume().getML() * PCE_RHOV_M + data.get(vehType.SOV).getVolume().getML() * PCE_SOV);
+
+        //Prepare the data
+        for (int i = 0; i <= 6; i++)
+        {
+                vehType typebyint = GetVehType(i);
+                //Get current vehicle class
+                DataPoint veh = data.get(typebyint);
+
+                //Set speed data
+                veh.setSpeed(FinalSpeed);
+
+                //Tally up total revenue
+                data.get(vehType.Total).AddRevenue(veh.getTotalRevenue());
+
+        }
+        boolean blue = true;
+        for (int i = 0; i <= 7; i++)
+        {
+                vehType typebyint = GetVehType(i);
+                //Get current vehicle class
+                DataPoint veh = data.get(typebyint);
+                String z = "class='l'";
+                if (veh.getType().equals("Total"))
+                {
+                        html+=("</tbody><tfoot>");
+                        z += " style='font-weight: bold;'";
+                }
+                String alt = "";
+                if (blue)
+                {
+                        alt = " class='alternating'";
+                }
+                blue = ! blue;
+                html += String.format("<tr%1$s>", alt) + "<td " + z + ">" + veh.getType() + "</td>" + "<td class='c'>" + veh.getVolume().getML() + "</td>" + "<td class='c'>" + veh.getVolume().getGP() + "</td>" + "<td class='c'>" + veh.getMLShare() + "</td>" + "<td class='c'>" + veh.getTollValue() + "</td>" + "<td class='c'>" + veh.getTotalRevenue() + "</td>" + "</tr>";
+                if (veh.getType().equals("Total"))
+                {
+                        html += "<tr>" + "<td class='f'>Avg. Speed (mph)</td>" + "<td class='c'>" + String.valueOf(FinalSpeed_Output.getML()) + "</td>" + "<td class='c'>" + FinalSpeed_Output.getGP() + "</td>" + "<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></tfoot></table><br>";
+                }
+        }
+        //continue here
+        content.loadContent(html);
         
     }    
 
@@ -1140,6 +1269,93 @@ public class ResultController implements Initializable {
             return (-U * Kc * Math.log(U / Uf));
         }
         return 0;
+    }
+
+    private void ChooseModelOptionForGP() {
+         double U = 0;
+        double No = NoGP;
+        double Uf = Uf_GP;
+        double Qc = CapGP;
+        double Kj = Double.parseDouble(Singleton.getInstance().getGPDensity().getText());
+        double Volperlane = VolGP / No;
+        if(Volperlane <= Qc)
+        {
+            U = Uf + 1;
+            double Q = 0;
+            double QQ = Volperlane;
+            while(QQ <= Q)
+            {
+                U -= 1;
+                Q = GetFlowBySelectedModel(U, Uf, Qc, Kj);
+            }
+        }
+        else if(Volperlane > Qc)
+        {
+            U = 0;
+            double Q = 0;
+            double QQ = (2 * Qc) - Volperlane;
+            if((int)Math.signum(QQ) == -1)
+            {
+                try {
+                    MessageBox(
+                            "Demand exceeded twice the given capacity of the general purpose lane(s). Please reduce demand in the User page. Calculation error");
+                } catch (IOException ex) {
+                    Logger.getLogger(ResultController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            while(QQ <= Q)
+            {
+                U += 1;
+                Q = GetFlowBySelectedModel(U, Uf, Qc, Kj);
+            }
+        }
+        uGP = U;  
+    }
+
+    private HashMap<vehType, DataPoint> CreateBlankDatabase() {
+        java.util.HashMap<vehType, DataPoint> test = new java.util.HashMap<>(11);
+        test.put(vehType.SOV, new DataPoint(vehType.forValue(0)));
+        test.put(vehType.RHOV_M, new DataPoint(vehType.forValue(1)));
+        test.put(vehType.SOV_T, new DataPoint(vehType.forValue(2)));
+        test.put(vehType.LTr, new DataPoint(vehType.forValue(3)));
+        test.put(vehType.ELTr, new DataPoint(vehType.forValue(4)));
+        test.put(vehType.ELTr_T2, new DataPoint(vehType.forValue(5)));
+        test.put(vehType.SpVeh, new DataPoint(vehType.forValue(6)));
+        test.put(vehType.Total, new DataPoint(vehType.forValue(7)));
+        return test;
+    }
+
+    private vehType GetVehType(int i) {
+        if(i==0)
+        {
+            return vehType.SOV;
+        }
+        else if (i==1)
+        {
+            return vehType.RHOV_M;
+        }
+        else if (i==2)
+        {
+            return vehType.SOV_T;
+        }
+        else if (i==3)
+        {
+            return vehType.LTr;
+        }
+        else if (i==4)
+        {
+            return vehType.ELTr;
+        }
+        else if (i==5)
+        {
+            return vehType.ELTr_T2;
+        }
+        else if (i==6)
+        {
+            return vehType.SpVeh;
+        }
+        else 
+            return vehType.Total;
     }
     
 }
