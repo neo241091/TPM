@@ -135,14 +135,14 @@ public class DataPoint
 			{
 				double CorridorLength = Double.parseDouble(Singleton.getInstance().getMLLength().getText());
 				//Toll * Volume * Length
-				this.mREV = String.valueOf(toll * (int)this.getVolume().getML() * CorridorLength);
+				this.mREV = String.valueOf(f.format(toll * (int)this.getVolume().getML() * CorridorLength));
 			}
 			else
 			{
 				this.mREV = String.valueOf(0);
 			}
 		}
-                else this.mREV = "0.0";
+                else this.mREV = "-";
 		return this.mREV;
 	}
 	public final double getMLShare()

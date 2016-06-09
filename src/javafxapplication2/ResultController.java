@@ -806,7 +806,6 @@ public class ResultController implements Initializable {
     RadioButton tollradio = Singleton.getInstance().gettollradio();
     ComboBox ModelDropDown = Singleton.getInstance().getModelDropDown();
     long corridordemand = Long.parseLong(Singleton.getInstance().getcorridordemand().getText());
-
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -919,7 +918,7 @@ public class ResultController implements Initializable {
         Uf_ML = Double.parseDouble(Singleton.getInstance().getMLSpeed().getText());
         CapGP = Double.parseDouble(Singleton.getInstance().getGPCapacity().getText());
         CapML = Double.parseDouble(Singleton.getInstance().getMLCapacity().getText());
-        DeadSetter = Double.parseDouble(Singleton.getInstance().getdeadsetter().getText());
+        DeadSetter = Double.parseDouble(Singleton.getInstance().getdeadsetter().getText())/100.0;
         html += ("<style>" +
                 ".l {text-align: left}" +
                 ".c {text-align: center}" +
@@ -965,6 +964,7 @@ public class ResultController implements Initializable {
         }
         html+=("<tr><td>Corridor Demand: ");
         html+=(corridordemand);
+        Demand = corridordemand;
         html+=(" vph</td></tr>");
         html+=("<tr><td>Number of Managed Lanes: ");
         html+=(NoML);
