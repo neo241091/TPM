@@ -16,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -42,6 +43,9 @@ public class UserController implements Initializable {
     private CheckBox issovallowed,ishovallowed,issovtallowed,issutallowed,issttallowed,isstdallowed,isspvallowed;    
     @FXML
     private CheckBox issovml,ishovml,issovtml,issutml,issttml,isstdml,isspvml;
+    
+    @FXML
+    private ComboBox timeofday;
     /**
      * Initializes the controller class.
      */
@@ -71,6 +75,30 @@ public class UserController implements Initializable {
         Singleton.getInstance().setstttoll(stttoll);
         Singleton.getInstance().setstdtoll(stdtoll);
         Singleton.getInstance().setspvtoll(spvtoll);
+        Singleton.getInstance().setissovallowed(issovallowed);
+        Singleton.getInstance().setishovallowed(ishovallowed);
+        Singleton.getInstance().setissovtallowed(issovtallowed);
+        Singleton.getInstance().setissutallowed(issutallowed);
+        Singleton.getInstance().setissttallowed(issttallowed);
+        Singleton.getInstance().setisstdallowed(isstdallowed);
+        Singleton.getInstance().setisspvallowed(isspvallowed);
+        //issovml,ishovml,issovtml,issutml,issttml,isstdml,isspvml
+        Singleton.getInstance().setissovml(issovml);
+        Singleton.getInstance().setishovml(ishovml);
+        Singleton.getInstance().setissovtml(issovtml);
+        Singleton.getInstance().setissutml(issutml);
+        Singleton.getInstance().setissttml(issttml);
+        Singleton.getInstance().setisstdml(isstdml);
+        Singleton.getInstance().setisspvml(isspvml);
+        //sovmlshare,hovmlshare,sovtmlshare,sutmlshare,sttmlshare,stdmlshare,spvmlshare
+        Singleton.getInstance().setsovmlshare(sovmlshare);
+        Singleton.getInstance().sethovmlshare(hovmlshare);
+        Singleton.getInstance().setsovtmlshare(sovtmlshare);
+        Singleton.getInstance().setsutmlshare(sutmlshare);
+        Singleton.getInstance().setsttmlshare(sttmlshare);
+        Singleton.getInstance().setstdmlshare(stdmlshare);
+        Singleton.getInstance().setspvmlshare(spvmlshare);
+        Singleton.getInstance().settimeofday(timeofday);
     }    
     
     @FXML

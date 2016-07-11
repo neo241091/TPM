@@ -22,7 +22,7 @@
          </font>
       </Label>
       <Label layoutX="185.0" layoutY="108.0" text="Please enter the ML and GP lane configuration in the boxes below." />
-      <ComboBox fx:id="ModelDropDown" layoutX="185.0" layoutY="75.0" prefWidth="150.0" visibleRowCount="3">
+      <ComboBox fx:id="ModelDropDown" layoutX="185.0" layoutY="75.0" onAction="#handleDropDownAction" prefWidth="150.0" visibleRowCount="3">
            <items>
         <FXCollections fx:factory="observableArrayList">
             <String fx:value="Drake" />
@@ -41,19 +41,19 @@
               <AnchorPane centerShape="false" minHeight="0.0" minWidth="0.0" prefHeight="205.0" prefWidth="571.0" scaleShape="false">
                      <children>
                         <Label layoutX="14.0" layoutY="14.0" text="Number of Lanes" />
-                        <TextField fx:id="GpSpeed" layoutX="169.0" layoutY="50.0" text="80" />
+                        <TextField fx:id="GpSpeed" layoutX="169.0" layoutY="50.0" text="70" />
                         <Label layoutX="14.0" layoutY="55.0" text="Free Flow Speed" />
                         <Label layoutX="14.0" layoutY="97.0" text="Capacity Per Lane" />
                         <TextField fx:id="GPCapacity" layoutX="169.0" layoutY="92.0" text="2200" />
                         <Label layoutX="14.0" layoutY="137.0" text="Corridor Length" />
-                        <TextField fx:id="GPLength" layoutX="169.0" layoutY="132.0" text="1.0" />
-                        <Label layoutX="14.0" layoutY="184.0" text="Jam Density" />
+                        <TextField fx:id="GPLength" layoutX="169.0" layoutY="132.0" text="6.0" />
+                        <Label fx:id="GPDensitylabel" layoutX="14.0" layoutY="184.0" text="Jam Density" />
                         <TextField fx:id="GPDensity" layoutX="169.0" layoutY="179.0" text="120" />
                         <Label layoutX="363.0" layoutY="14.0" text="Lanes" />
                         <Label layoutX="365.0" layoutY="55.0" text="mph" />
                         <Label layoutX="363.0" layoutY="97.0" text="pcphpl" />
                         <Label layoutX="365.0" layoutY="137.0" text="Miles" />
-                        <Label layoutX="363.0" layoutY="184.0" text="pcpmp" />
+                        <Label fx:id="GPDensitylabel1" layoutX="363.0" layoutY="184.0" text="pcpmp" />
                         <TextField fx:id="GPNoLanes" layoutX="169.0" layoutY="9.0" text="4" />
                      </children>
                   </AnchorPane>
@@ -74,14 +74,14 @@
                         <Label layoutX="14.0" layoutY="97.0" text="Capacity Per Lane" />
                         <TextField fx:id="MLCapacity" layoutX="169.0" layoutY="92.0" text="2200" />
                         <Label layoutX="14.0" layoutY="137.0" text="Corridor Length" />
-                        <TextField fx:id="MLLength" layoutX="169.0" layoutY="132.0" text="1.0" />
-                        <Label layoutX="14.0" layoutY="184.0" text="Jam Density" />
+                        <TextField fx:id="MLLength" layoutX="169.0" layoutY="132.0" text="4.0" />
+                        <Label fx:id="MLDensitylabel" layoutX="14.0" layoutY="184.0" text="Jam Density" />
                         <TextField fx:id="MLDensity" layoutX="169.0" layoutY="179.0" text="120" />
                         <Label layoutX="363.0" layoutY="14.0" text="Lanes" />
                         <Label layoutX="365.0" layoutY="55.0" text="mph" />
                         <Label layoutX="363.0" layoutY="97.0" text="pcphpl" />
                         <Label layoutX="365.0" layoutY="137.0" text="Miles" />
-                        <Label layoutX="363.0" layoutY="184.0" text="pcpmp" />
+                        <Label fx:id="MLDensitylabel2" layoutX="363.0" layoutY="184.0" text="pcpmp" />
                      </children>
                   </AnchorPane>
                </content>

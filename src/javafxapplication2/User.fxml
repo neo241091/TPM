@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.collections.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -16,9 +17,9 @@
       </Label>
       <GridPane layoutX="169.0" layoutY="58.0" prefHeight="504.0" prefWidth="764.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="243.0" minWidth="10.0" prefWidth="208.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="128.0" minWidth="10.0" prefWidth="88.0" />
-            <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="128.0" minWidth="10.0" prefWidth="43.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="243.0" minWidth="10.0" prefWidth="190.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="128.0" minWidth="10.0" prefWidth="111.0" />
+            <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="128.0" minWidth="10.0" prefWidth="33.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="3.0" prefWidth="67.0" />
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="114.0" minWidth="10.0" prefWidth="108.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.0" minWidth="10.0" prefWidth="80.0" />
@@ -36,6 +37,7 @@
           <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label text="Registered HOVs and Motorcycles&#10;(TEXpress Class 12) " wrapText="true" GridPane.rowIndex="2">
@@ -169,6 +171,25 @@
             <Label text="\%" GridPane.columnIndex="2" GridPane.rowIndex="7" />
             <Label text="vph" GridPane.columnIndex="2" GridPane.rowIndex="8" />
             <Label text="\%" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+            <Label text="Time of Day" GridPane.rowIndex="10">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+               <tooltip>
+                  <Tooltip contentDisplay="TEXT_ONLY" text="The percent of drivers in each vehicle class who will not use managed lanes if there is any charge at all" />
+               </tooltip>
+            </Label>
+            <ComboBox fx:id="timeofday" prefWidth="150.0" value=" " visibleRowCount="3" GridPane.columnIndex="1" GridPane.rowIndex="10">
+               <items>
+                  <FXCollections fx:factory="observableArrayList">
+                     <String fx:value=" " />
+                     <String fx:value="AM peak" />
+                     <String fx:value="PM peak" />
+                     <String fx:value="Off peak" />
+                     <String fx:value="Off peak" />
+                  </FXCollections>
+               </items>
+            </ComboBox>
          </children>
       </GridPane>
       <Button id="userBackutton" layoutX="715.0" layoutY="657.0" mnemonicParsing="false" onAction="#handleuserBackbutton" text="Back" />
