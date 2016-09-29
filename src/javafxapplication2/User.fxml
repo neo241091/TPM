@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.collections.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="729.0" prefWidth="1019.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxapplication2.UserController">
+<AnchorPane id="AnchorPane" prefHeight="729.0" prefWidth="1019.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxapplication2.UserController">
    <children>
       <Label layoutX="169.0" layoutY="24.0" text="User Information">
          <font>
@@ -85,7 +92,7 @@
                   <Font name="System Bold" size="15.0" />
                </font>
                <tooltip>
-                  <Tooltip contentDisplay="TEXT_ONLY" text="The percent of drivers in each vehicle class who will not use managed lanes if there is any charge at all" />
+                  <Tooltip text="the percent of drivers in each vehicle class that will not use ML if there is any charges at all." />
                </tooltip>
             </Label>
             <TextField fx:id="sovvhmix" text="93.56" GridPane.columnIndex="1" GridPane.rowIndex="1" />
@@ -118,15 +125,21 @@
             <TextField fx:id="stdmlshare" disable="true" text="10" GridPane.columnIndex="7" GridPane.rowIndex="6" />
             <TextField fx:id="spvmlshare" disable="true" text="100" GridPane.columnIndex="7" GridPane.rowIndex="7" />
             <TextField fx:id="deadsetter" text="4.1" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-            <Label text="Vehicle Mix" wrapText="true" GridPane.columnIndex="1">
+            <Label fx:id="Vhmixlabel" text="Vehicle Mix" wrapText="true" GridPane.columnIndex="1">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="the percentage of each vehicle class in the corridor (both ML and GPL)" />
+               </tooltip>
             </Label>
             <Label text="PCE" GridPane.columnIndex="3">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="passenger car equivalent factor" />
+               </tooltip>
             </Label>
             <Label text="Check if not allowed on ML" wrapText="true" GridPane.columnIndex="4">
                 <font>
@@ -142,11 +155,17 @@
                 <font>
                   <Font name="System Bold" size="15.0" />
                </font>
+               <tooltip>
+                  <Tooltip text=" vehicle classes with fixed volume share will be excluded from the equilibrium assignment" />
+               </tooltip>
             </Label>
             <Label text="ML Share" GridPane.columnIndex="7">
                 <font>
                   <Font name="System Bold" size="15.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="the actual ML share as observed in the field " />
+               </tooltip>
             </Label>
             <CheckBox fx:id="issovallowed" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handlesovallowed" GridPane.columnIndex="4" GridPane.rowIndex="1" />
             <CheckBox fx:id="ishovallowed" mnemonicParsing="false" onAction="#handlehovallowed" GridPane.columnIndex="4" GridPane.rowIndex="2" />
@@ -171,12 +190,12 @@
             <Label text="\%" GridPane.columnIndex="2" GridPane.rowIndex="7" />
             <Label text="vph" GridPane.columnIndex="2" GridPane.rowIndex="8" />
             <Label text="\%" GridPane.columnIndex="2" GridPane.rowIndex="9" />
-            <Label text="Time of Day" GridPane.rowIndex="10">
+            <Label text="Time Period" GridPane.rowIndex="10">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
                <tooltip>
-                  <Tooltip contentDisplay="TEXT_ONLY" text="The percent of drivers in each vehicle class who will not use managed lanes if there is any charge at all" />
+                  <Tooltip contentDisplay="TEXT_ONLY" text="this option provides the model with default values of the users’ revealed WTP estimated for different times of day and different vehicle classes " />
                </tooltip>
             </Label>
             <ComboBox fx:id="timeofday" prefWidth="150.0" value=" " visibleRowCount="3" GridPane.columnIndex="1" GridPane.rowIndex="10">

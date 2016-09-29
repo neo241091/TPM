@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="767.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxapplication2.TimeValueController">
+<AnchorPane id="AnchorPane" prefHeight="767.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxapplication2.TimeValueController">
    <children>
       <GridPane layoutX="180.0" layoutY="82.0" prefHeight="566.0" prefWidth="767.0">
         <columnConstraints>
@@ -35,7 +39,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="MaximumToll Ceiling" wrapText="true">
+            <Label text="Maximum Users' WTP Values" wrapText="true">
                <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -157,7 +161,7 @@
             <TextField id="finalSPV" fx:id="spvtime10" disable="true" editable="false" text="5.1" GridPane.columnIndex="8" GridPane.rowIndex="10" />
          </children>
       </GridPane>
-      <Label layoutX="180.0" layoutY="14.0" text="Value of Time">
+      <Label layoutX="180.0" layoutY="14.0" text="Willingness-To-Pay">
          <font>
             <Font name="System Bold" size="23.0" />
          </font>

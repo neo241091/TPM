@@ -142,7 +142,6 @@ public class DataPoint
 				this.mREV = String.valueOf(0);
 			}
 		}
-                else this.mREV = "-";
 		return this.mREV;
 	}
 	public final double getMLShare()
@@ -153,7 +152,7 @@ public class DataPoint
 		}
 		else
 		{
-			return 0;
+			return 0.0;
 		}
 	}
 

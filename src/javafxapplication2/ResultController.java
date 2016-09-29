@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package javafxapplication2;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.*;
 
 import java.io.IOException;
@@ -28,6 +30,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.layout.Pane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 /**
@@ -836,6 +839,35 @@ public class ResultController implements Initializable {
     @FXML
     private void handleresulthelp(ActionEvent event) {
     }
+    
+    @FXML
+    private void handleExportButton(ActionEvent event){
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Comma Seperated Value file (*.csv)", "*.csv");
+        fileChooser.getExtensionFilters().add(extFilter);
+        //Show save file dialog
+        Button closeButton =(Button) event.getSource();
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        File file = fileChooser.showSaveDialog(stage);        
+        if(file != null){
+                  SaveFile(GenerateCSV(), file);
+        }        
+    }
+    
+    private void SaveFile(String content, File file){
+        try {
+            FileWriter fileWriter = null;
+            
+            fileWriter = new FileWriter(file);
+            fileWriter.write(content);
+            fileWriter.close();
+        } catch (IOException ex) {
+            Logger.getLogger(ex.toString());
+        }
+        
+    }
+    
+    
 
     @FXML
     private void handleresultclose(ActionEvent event) {
@@ -983,14 +1015,14 @@ public class ResultController implements Initializable {
             html+=("<tr><td>Speed-flow model: Underwood" + "</td></tr>");
         }
         html+=("<tr><td>Corridor Demand: ");
-        html+=(corridordemand);
+        html+=Integer.toString((int)(corridordemand));
         Demand = corridordemand;
         html+=(" vph</td></tr>");
         html+=("<tr><td>Number of Managed Lanes: ");
-        html+=(NoML);
+        html+=Integer.toString((int)(NoML));
         html+=(" lanes</td></tr>");
         html+=("<tr><td>Length of Managed Lane corridor: ");
-        html+=(NoGP);
+        html+=Integer.toString((int)(NoGP));
         html+=(" miles</td></tr>");
         html+=("<tr><td>Length of General Purpose Lane corridor: ");
         html+=(Length_GP);
@@ -1684,7 +1716,7 @@ public class ResultController implements Initializable {
                         alt = " class='alternating'";
                 }
                 blue = ! blue;
-                html += String.format("<tr%1$s>", alt) + "<td " + z + ">" + veh.getType() + "</td>" + "<td class='c'>" + veh.getVolume().getML() + "</td>" + "<td class='c'>" + veh.getVolume().getGP() + "</td>" + "<td class='c'>" + veh.getMLShare() + "</td>" + "<td class='c'>" + veh.getTollValue() + "</td>" + "<td class='c'>" + veh.getTotalRevenue() + "</td>" + "</tr>";
+                html += String.format("<tr%1$s>", alt) + "<td " + z + ">" + veh.getType() + "</td>" + "<td class='c'>" + Integer.toString((int)veh.getVolume().getML()) + "</td>" + "<td class='c'>" + Integer.toString((int)veh.getVolume().getGP()) + "</td>" + "<td class='c'>" + f.format(veh.getMLShare()) + "</td>" + "<td class='c'>" + veh.getTollValue() + "</td>" + "<td class='c'>" + veh.getTotalRevenue() + "</td>" + "</tr>";
                 if (veh.getType().equals("Total"))
                 {
                         html += "<tr>" + "<td class='f'>Avg. Speed (mph)</td>" + "<td class='c'>" + String.valueOf(FinalSpeed_Output.getML()) + "</td>" + "<td class='c'>" + FinalSpeed_Output.getGP() + "</td>" + "<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></tfoot></table><br>";
@@ -4813,6 +4845,61 @@ public class ResultController implements Initializable {
 		}
 		return true;
 	}
+
+    private String GenerateCSV() {
+        String csv = new String();
+        String vbCrLf = "\n";
+        if(tollradio.isSelected())
+        {
+            csv += "Objective 1: SOV toll value per mile: $" + Toll + vbCrLf ;
+        }
+        if(speedradio.isSelected())
+        {
+             csv += "Objective 2: Min desired speed on ML: " + Integer.toString((int) speedobj) + " mph" + vbCrLf;
+        }
+        
+        if(ModelDropDown.getValue().equals("Drake"))
+        {
+            csv += "Speed-flow model: Drake" + vbCrLf ;
+        }
+        if(ModelDropDown.getValue().equals("GreenShield"))
+        {
+            csv += "Speed-flow model: GreenShield" + vbCrLf ;
+        }
+        if(ModelDropDown.getValue().equals("Underwood"))
+        {
+            csv += "Speed-flow model: Underwood" + vbCrLf ;
+        }
+        
+        csv +=
+            "Number of Managed Lanes: " + Integer.toString((int)NoML) + " lanes" + vbCrLf +
+            "Number of General Purpose Lanes: " + Integer.toString((int)NoGP) + " lanes" + vbCrLf +
+            "Length of Managed Lane corridor: " + Length_ML + " miles" + vbCrLf +
+            "Length of General Purpose Lane corridor: " + Length_GP + " miles" + vbCrLf +
+            "Corridor Demand: " + corridordemand + " vph" + vbCrLf + vbCrLf +
+            "VOLUME AND TOLL SUMMARY:" + vbCrLf +
+            "Vehicle Class,VolumeML(vph),VolumeGP(vph),ML Share(%),Toll Value($/mile),Total Revenue($/hr)" + vbCrLf;
+        
+        for (int i = 0; i <= 6; i++)
+        {
+                vehType typebyint = GetVehType(i);
+                DataPoint current = data.get(typebyint);
+                //Get current vehicle class
+                csv +=  current.getType() + "," +
+                        Integer.toString((int)current.getVolume().getML()) + "," +
+                        Integer.toString((int)current.getVolume().getGP()) + "," +
+                        f.format(current.getMLShare()) + "," +
+                        current.getTollValue() + "," +
+                        current.getTotalRevenue() + vbCrLf;
+        }
+        csv += ",,,," + vbCrLf +
+               ",Managed Lane,General Purpose" + vbCrLf +
+               "Total Volume (pc/hr)," + Integer.toString((int)FinalVolume.getML()) + "," 
+                + Integer.toString((int)FinalVolume.getGP()) + vbCrLf +
+               "Avg. Speed (Mile/hr)," + FinalSpeed.getML() + "," + FinalSpeed.getGP() + vbCrLf ;
+        
+        return csv;
+    }
 
 
     
