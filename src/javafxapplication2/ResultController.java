@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package javafxapplication2;
+import java.awt.image.BufferedImage;
+import java.awt.print.PrinterException;
+import javafx.print.PrinterJob;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.*;
@@ -14,12 +17,14 @@ import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -27,6 +32,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.RadioButton;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -4899,6 +4905,28 @@ public class ResultController implements Initializable {
                "Avg. Speed (Mile/hr)," + FinalSpeed.getML() + "," + FinalSpeed.getGP() + vbCrLf ;
         
         return csv;
+    }
+    
+    @FXML
+    private void handlePrintButton(ActionEvent event)
+    {
+        PrinterJob printJob = PrinterJob.createPrinterJob();
+        Stage stage; 
+        Button nextButton =(Button) event.getSource();
+        stage =(Stage) nextButton.getScene().getWindow();
+        /*Scene scene = stage.getScene();
+        WritableImage snapshot = webengine.snapshot(new SnapshotParameters(),null);
+        BufferedImage bufferedImage = SwingFXUtils.fromFXImage(snapshot, null);
+        printJob.setPrintable(new ImagePrintable(printJob, bufferedImage));*/
+        if (printJob.showPrintDialog(stage.getScene().getWindow())) {
+            try {
+                webengine.getEngine().print(printJob);
+                printJob.endJob();
+            } catch (Exception prt) {
+                prt.printStackTrace();
+            }
+        }
+        webengine.getEngine().print(printJob);
     }
 
 

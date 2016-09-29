@@ -5,9 +5,13 @@
  */
 package javafxapplication2;
 
+import java.awt.image.BufferedImage;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +23,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
 
 /**
@@ -178,6 +183,27 @@ public class FacilityController implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+    
+    @FXML
+    private void handlePrintButton(ActionEvent event)
+    {
+        PrinterJob printJob = PrinterJob.getPrinterJob();
+        Stage stage; 
+        Button nextButton =(Button) event.getSource();
+        stage =(Stage) nextButton.getScene().getWindow();
+        Scene scene = stage.getScene();
+        WritableImage snapshot = scene.snapshot(null);
+        BufferedImage bufferedImage = SwingFXUtils.fromFXImage(snapshot, null);
+        printJob.setPrintable(new ImagePrintable(printJob, bufferedImage));
+        if (printJob.printDialog()) {
+            try {
+                printJob.print();
+            } catch (PrinterException prt) {
+                prt.printStackTrace();
+            }
+        }
+        
     }
    
 }
