@@ -207,7 +207,8 @@
                      <String fx:value=" " />
                      <String fx:value="AM peak" />
                      <String fx:value="PM peak" />
-                     <String fx:value="Off peak" />
+                     <String fx:value="AM Inter-peak" />
+                     <String fx:value="PM Inter-peak" />
                      <String fx:value="Off peak" />
                   </FXCollections>
                </items>

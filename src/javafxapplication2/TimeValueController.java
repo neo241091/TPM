@@ -128,11 +128,51 @@ public class TimeValueController implements Initializable {
         spvtime8.textProperty().addListener((observable, oldValue, newValue) -> spvtimeListener(newValue));
         spvtime9.textProperty().addListener((observable, oldValue, newValue) -> spvtimeListener(newValue));
         ComboBox timeday = Singleton.getInstance().gettimeofday();
-        if(!timeday.getValue().equals(" "))
+        if(timeday.getValue().equals(" "))
         {
             double[] zeros = new double[10];
             double[] tens = {10,10,10,10,10,10,10,10,10,10};
-            setTimeValues(tens, zeros, zeros, zeros, zeros, zeros, zeros);
+            setTimeValues(true,tens, zeros, zeros, zeros, zeros, zeros, zeros);
+        }
+        else if(timeday.getValue().equals("AM peak"))
+        {
+            double[] zeros = new double[10];
+            double[] tens = {24,15,13,11,10,6,6,5,5,5};
+            double[] tolls = {30,60,90,120,150,180,210,240,270};
+            setTimeValues(false,tens, zeros, zeros, zeros, zeros, zeros, zeros);
+            setTollValues(tolls);
+        }
+        else if(timeday.getValue().equals("PM peak"))
+        {
+            double[] zeros = new double[10];
+            double[] tens = {21,10,10,12.5,14.5,5,6,7,7,7};
+            double[] tolls = {25,50,75,100,125,150,175,200,225};
+            setTimeValues(false,tens, zeros, zeros, zeros, zeros, zeros, zeros);
+            setTollValues(tolls);
+        }
+        else if(timeday.getValue().equals("AM Inter-peak"))
+        {
+            double[] zeros = new double[10];
+            double[] tens = {10.5,15,16,25,14.5,6,4,3,3,3};
+            double[] tolls = {20,40,60,80,100,120,140,160,180};
+            setTimeValues(false,tens, zeros, zeros, zeros, zeros, zeros, zeros);
+            setTollValues(tolls);
+        }
+        else if(timeday.getValue().equals("PM Inter-peak"))
+        {
+            double[] zeros = new double[10];
+            double[] tens = {6,15,16,25,17.5,7.5,4,3,3,3};
+            double[] tolls = {20,40,60,80,100,120,140,160,180};
+            setTimeValues(false,tens, zeros, zeros, zeros, zeros, zeros, zeros);
+            setTollValues(tolls);
+        }
+        else if(timeday.getValue().equals("Off peak"))
+        {
+            double[] zeros = new double[10];
+            double[] tens = {24,15,13,11,10,6,6,5,5,5};
+            double[] tolls = {15,30,45,60,75,100,125,150,175};
+            setTimeValues(false,tens, zeros, zeros, zeros, zeros, zeros, zeros);
+            setTollValues(tolls);
         }
         Singleton.getInstance().setMaxtoll1(Maxtoll1);
         Singleton.getInstance().setMaxtoll2(Maxtoll2);
@@ -436,7 +476,7 @@ public class TimeValueController implements Initializable {
         stage.show();
     } 
     
-    private void setTimeValues(double[] sovval,double[] hovval,double[] sovtval,double[] sutval,double[] sttval,double[] stdval,double[] spvhval)
+    private void setTimeValues(boolean setallvalues,double[] sovval ,double[] hovval,double[] sovtval,double[] sutval,double[] sttval,double[] stdval,double[] spvhval)
     {
         sovtime1.setText(twoDForm.format(sovval[0]));
         sovtime2.setText(twoDForm.format(sovval[1]));
@@ -447,6 +487,7 @@ public class TimeValueController implements Initializable {
         sovtime7.setText(twoDForm.format(sovval[6]));
         sovtime8.setText(twoDForm.format(sovval[7]));
         sovtime9.setText(twoDForm.format(sovval[8]));
+        if(!setallvalues) return;
         hovtime1.setText(twoDForm.format(hovval[0]));
         hovtime2.setText(twoDForm.format(hovval[1]));
         hovtime3.setText(twoDForm.format(hovval[2]));
@@ -521,6 +562,18 @@ public class TimeValueController implements Initializable {
             }
         }
         
+    }
+
+    private void setTollValues(double[] tolls) {
+        Maxtoll1.setText(twoDForm.format(tolls[0]));
+        Maxtoll2.setText(twoDForm.format(tolls[1]));
+        Maxtoll3.setText(twoDForm.format(tolls[2]));
+        Maxtoll4.setText(twoDForm.format(tolls[3]));
+        Maxtoll5.setText(twoDForm.format(tolls[4]));
+        Maxtoll6.setText(twoDForm.format(tolls[5]));
+        Maxtoll7.setText(twoDForm.format(tolls[6]));
+        Maxtoll8.setText(twoDForm.format(tolls[7]));
+        Maxtoll9.setText(twoDForm.format(tolls[8]));
     }
     
 }
