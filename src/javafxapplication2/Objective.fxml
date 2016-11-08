@@ -39,9 +39,9 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Hyperlink>
-      <Hyperlink layoutX="34.0" layoutY="210.0" onAction="#handleTimeValuelink" text="Value of Time">
+      <Hyperlink layoutX="34.0" layoutY="210.0" onAction="#handleTimeValuelink" text="Willingness-To-Pay">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="System Bold" size="15.0" />
          </font>
       </Hyperlink>
       <Hyperlink layoutX="34.0" layoutY="137.0" onAction="#handleUserlink" text="User Info">

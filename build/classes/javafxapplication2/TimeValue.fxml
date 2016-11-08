@@ -166,7 +166,7 @@
             <Font name="System Bold" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="180.0" layoutY="48.0" text="Percent of users in each vehicle class with the specified time value range.You may edit any field in white:" />
+      <Label layoutX="180.0" layoutY="48.0" text="Percent of users in each vehicle class with the specified time value range. You may edit any field in white:" />
       <Button id="TimeBackButton" layoutX="705.0" layoutY="695.0" mnemonicParsing="false" onAction="#handletimeBackButton" text="Back" />
       <Button id="timeNextButton" layoutX="766.0" layoutY="695.0" mnemonicParsing="false" onAction="#handletimeNextButton" text="Next" />
       <Button id="TimeHelpButton" layoutX="896.0" layoutY="695.0" mnemonicParsing="false" onAction="#handletimeHelpButton" text="Help" />
@@ -183,9 +183,9 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Hyperlink>
-      <Hyperlink layoutX="27.0" layoutY="245.0" onAction="#handleTimeValuelink" text="Value of Time">
+      <Hyperlink layoutX="27.0" layoutY="245.0" onAction="#handleTimeValuelink" text="Willingness-To-Pay">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="System Bold" size="15.0" />
          </font>
       </Hyperlink>
       <Hyperlink layoutX="27.0" layoutY="172.0" onAction="#handleUserlink" text="User Info">

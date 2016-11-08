@@ -13,6 +13,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -107,6 +109,13 @@ public class UserController implements Initializable {
         Singleton.getInstance().setstdmlshare(stdmlshare);
         Singleton.getInstance().setspvmlshare(spvmlshare);
         Singleton.getInstance().settimeofday(timeofday);
+        handlesovallowed(new ActionEvent());
+        handlehovallowed(new ActionEvent());
+        handlesovtallowed(new ActionEvent());
+        handlesutallowed(new ActionEvent());
+        handlestdallowed(new ActionEvent());
+        handlespvallowed(new ActionEvent());
+        handlesttallowed(new ActionEvent());
     }    
     
     @FXML
@@ -213,7 +222,10 @@ public class UserController implements Initializable {
         {
             sovmlshare.setDisable(false);
         }
-        else sovmlshare.setDisable(true);
+        else 
+        {            
+            sovmlshare.setDisable(true);
+        }
     }
     
     @FXML
@@ -222,7 +234,10 @@ public class UserController implements Initializable {
         {
             hovmlshare.setDisable(false);
         }
-        else hovmlshare.setDisable(true);
+        else 
+        {            
+            hovmlshare.setDisable(true);            
+        }
     }
     
     @FXML
@@ -231,7 +246,10 @@ public class UserController implements Initializable {
         {
             sovtmlshare.setDisable(false);
         }
-        else sovtmlshare.setDisable(true);
+        else 
+        {
+            sovtmlshare.setDisable(true);
+        }
     }
     
     @FXML
@@ -240,7 +258,10 @@ public class UserController implements Initializable {
         {
             sutmlshare.setDisable(false);
         }
-        else sutmlshare.setDisable(true);
+        else
+        {
+            sutmlshare.setDisable(true);
+        }
     }
     
     @FXML
@@ -249,7 +270,10 @@ public class UserController implements Initializable {
         {
             sttmlshare.setDisable(false);
         }
-        else sttmlshare.setDisable(true);
+        else 
+        {
+            sttmlshare.setDisable(true);
+        }
     }
     
     @FXML
@@ -258,7 +282,10 @@ public class UserController implements Initializable {
         {
             spvmlshare.setDisable(false);
         }
-        else spvmlshare.setDisable(true);
+        else 
+        {
+            spvmlshare.setDisable(true);
+        }
     }
     
     @FXML
@@ -267,70 +294,115 @@ public class UserController implements Initializable {
         {
             stdmlshare.setDisable(false);
         }
-        else stdmlshare.setDisable(true);
+        else 
+        {
+            stdmlshare.setDisable(true);
+        }
     }
     
     @FXML 
     private void handlesovallowed(ActionEvent event){
         if(issovallowed.isSelected())
         {
+            issovml.setSelected(false);
+            issovml.setDisable(true);
             sovtoll.setDisable(true);
         }
-        else sovtoll.setDisable(false);
+        else
+        {
+            sovtoll.setDisable(false);
+            issovml.setDisable(false);
+        }
     }
     
     @FXML 
     private void handlehovallowed(ActionEvent event){
         if(ishovallowed.isSelected())
         {
+            ishovml.setSelected(false);
+            ishovml.setDisable(true);
             hovtoll.setDisable(true);
         }
-        else hovtoll.setDisable(false);
+        else 
+        {
+            hovtoll.setDisable(false);            
+            ishovml.setDisable(false);
+        }
     }
     
     @FXML 
     private void handlesovtallowed(ActionEvent event){
         if(issovtallowed.isSelected())
         {
+            issovtml.setSelected(false);
+            issovtml.setDisable(true);
             sovttoll.setDisable(true);
         }
-        else sovttoll.setDisable(false);
+        else 
+        {            
+            issovtml.setDisable(false);
+            sovttoll.setDisable(false);
+        }
     }
     
     @FXML 
     private void handlesutallowed(ActionEvent event){
         if(issutallowed.isSelected())
         {
+            issutml.setSelected(false);
+            issutml.setDisable(true);
             suttoll.setDisable(true);
         }
-        else suttoll.setDisable(false);
+        else 
+        {
+            issutml.setDisable(false);
+            suttoll.setDisable(false);
+        }
     }
     
     @FXML 
     private void handlesttallowed(ActionEvent event){
         if(issttallowed.isSelected())
         {
+            issttml.setSelected(false);
+            issttml.setDisable(true);
             stttoll.setDisable(true);
         }
-        else stttoll.setDisable(false);
+        else 
+        {
+            issttml.setDisable(false);
+            stttoll.setDisable(false);
+        }
     }
     
     @FXML 
     private void handlestdallowed(ActionEvent event){
         if(isstdallowed.isSelected())
         {
+            isstdml.setSelected(false);
+            isstdml.setDisable(true);
             stdtoll.setDisable(true);
         }
-        else stdtoll.setDisable(false);
+        else 
+        {
+            isstdml.setDisable(false);
+            stdtoll.setDisable(false);
+        }
     }
     
     @FXML 
     private void handlespvallowed(ActionEvent event){
         if(isspvallowed.isSelected())
         {
+            isspvml.setSelected(false);
+            isspvml.setDisable(true);
             spvtoll.setDisable(true);
         }
-        else spvtoll.setDisable(false);
+        else 
+        {
+            isspvml.setDisable(false);
+            spvtoll.setDisable(false);
+        }
     }
     @FXML
     private void handlePrintButton(ActionEvent event)
