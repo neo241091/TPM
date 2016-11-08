@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.web.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Hyperlink?>
@@ -8,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane id="AnchorPane" prefHeight="709.0" prefWidth="1023.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxapplication2.ResultController">
+<AnchorPane id="AnchorPane" prefHeight="709.0" prefWidth="1023.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxapplication2.ResultController">
    <children>
       <Label layoutX="171.0" layoutY="34.0" text="Summary">
          <font>
@@ -18,7 +23,7 @@
       <Button layoutX="925.0" layoutY="633.0" mnemonicParsing="false" onAction="#handleresulthelp" text="Help" />
       <Button layoutX="856.0" layoutY="633.0" mnemonicParsing="false" onAction="#handleresultclose" text="Close" />
       <Button layoutX="794.0" layoutY="633.0" mnemonicParsing="false" onAction="#handleresultback" text="Back" />
-      <CheckBox layoutX="39.0" layoutY="638.0" mnemonicParsing="false" text="Save current input values" />
+      <CheckBox fx:id="resultsaveinput" layoutX="39.0" layoutY="638.0" mnemonicParsing="false" text="Save current input values" />
       <Button layoutX="912.0" layoutY="27.0" mnemonicParsing="false" onAction="#handlePrintButton" text="Print" />
       <Button layoutX="778.0" layoutY="27.0" mnemonicParsing="false" onAction="#handleExportButton" text="Export to Excel" />
       <WebView fx:id="webengine" layoutX="171.0" layoutY="68.0" prefHeight="539.0" prefWidth="709.0" />

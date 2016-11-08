@@ -8,6 +8,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import java.util.prefs.*;
 
 /**
  *
@@ -18,6 +19,7 @@ public class Singleton {
      public static Singleton getInstance(){
             return instance;
         }
+     private Preferences prefs;
      private TextField speedtextsing,tolltextsing,corridordemand,MLNoLanes,GPNoLanes,GPLength,GpSpeed,
              MLSpeed,GPCapacity,MLCapacity,MLLength,deadsetter,sovvhmix,hovvhmix,sovtvhmix,sutvhmix,
              sttvhmix,stdvhmix,sphvhmix,sovpce,hovpce,sovtpce,sutpce,sttpce,stdpce,sphpce,
@@ -1067,4 +1069,181 @@ public class Singleton {
         {
             return timeofday;
         }
+        
+        public void Save()
+        {
+            prefs = Preferences.userNodeForPackage(this.getClass());
+            prefs.put("speedtextsing", speedtextsing.getText());
+            prefs.put("tolltextsing", tolltextsing.getText());
+            prefs.put("corridordemand", corridordemand.getText());
+            prefs.put("MLNoLanes", MLNoLanes.getText());
+            prefs.put("GPNoLanes", GPNoLanes.getText());
+            prefs.put("GPLength", GPLength.getText());
+            prefs.put("GpSpeed", GpSpeed.getText());
+            prefs.put("MLSpeed", MLSpeed.getText());
+            prefs.put("GPCapacity", GPCapacity.getText());
+            prefs.put("MLCapacity", MLCapacity.getText());
+            prefs.put("MLLength", MLLength.getText());
+            prefs.put("deadsetter", deadsetter.getText());
+            prefs.put("sovvhmix", sovvhmix.getText());
+            prefs.put("hovvhmix", hovvhmix.getText());
+            prefs.put("sovtvhmix", sovtvhmix.getText());
+            prefs.put("sutvhmix", sutvhmix.getText());
+            prefs.put("sttvhmix", sttvhmix.getText());
+            prefs.put("stdvhmix", stdvhmix.getText());
+            prefs.put("sphvhmix", sphvhmix.getText());
+            prefs.put("sovpce", sovpce.getText());
+            prefs.put("hovpce", hovpce.getText());
+            prefs.put("sovtpce", sovtpce.getText());
+            prefs.put("sutpce", sutpce.getText());
+            prefs.put("sttpce", sttpce.getText());
+            prefs.put("stdpce", stdpce.getText());
+            prefs.put("sphpce", sphpce.getText());
+            prefs.put("sovtoll", sovtoll.getText());
+            prefs.put("hovtoll", hovtoll.getText());
+            prefs.put("sovttoll", sovttoll.getText());
+            prefs.put("suttoll", suttoll.getText());
+            prefs.put("stttoll", stttoll.getText());
+            prefs.put("stdtoll", stdtoll.getText());
+            prefs.put("spvtoll", spvtoll.getText());
+            prefs.put("GPDensity", GPDensity.getText());
+            
+            prefs.put("Maxtoll1", Maxtoll1.getText());
+            prefs.put("Maxtoll2", Maxtoll2.getText());
+            prefs.put("Maxtoll3", Maxtoll3.getText());
+            prefs.put("Maxtoll4", Maxtoll4.getText());
+            prefs.put("Maxtoll5", Maxtoll5.getText());
+            prefs.put("Maxtoll6", Maxtoll6.getText());
+            prefs.put("Maxtoll7", Maxtoll7.getText());
+            prefs.put("Maxtoll8", Maxtoll8.getText());
+            prefs.put("Maxtoll9", Maxtoll9.getText());
+            prefs.put("Maxtoll10", Maxtoll10.getText());
+            prefs.put("MLDensity", MLDensity.getText());
+            
+            prefs.put("sovmlshare", sovmlshare.getText());
+            prefs.put("hovmlshare", hovmlshare.getText());
+            prefs.put("sovtmlshare", sovtmlshare.getText());
+            prefs.put("sutmlshare", sutmlshare.getText());
+            prefs.put("sttmlshare", sttmlshare.getText());
+            prefs.put("stdmlshare", stdmlshare.getText());
+            prefs.put("spvmlshare", spvmlshare.getText());
+            
+            
+            prefs.put("sovttime1", sovttime1.getText());
+            prefs.put("sovttime2", sovttime2.getText());
+            prefs.put("sovttime3", sovttime3.getText());
+            prefs.put("sovttime4", sovttime4.getText());
+            prefs.put("sovttime5", sovttime5.getText());
+            prefs.put("sovttime6", sovttime6.getText());
+            prefs.put("sovttime7", sovttime7.getText());
+            prefs.put("sovttime8", sovttime8.getText());
+            prefs.put("sovttime9", sovttime9.getText());
+            prefs.put("sovttime10", sovttime10.getText());
+            
+            prefs.put("sovtime1", sovtime1.getText());
+            prefs.put("sovtime2", sovtime2.getText());
+            prefs.put("sovtime3", sovtime3.getText());
+            prefs.put("sovtime4", sovtime4.getText());
+            prefs.put("sovtime5", sovtime5.getText());
+            prefs.put("sovtime6", sovtime6.getText());
+            prefs.put("sovtime7", sovtime7.getText());
+            prefs.put("sovtime8", sovtime8.getText());
+            prefs.put("sovtime9", sovtime9.getText());
+            prefs.put("sovtime10", sovtime10.getText());
+            
+            prefs.put("hovtime1", hovtime1.getText());
+            prefs.put("hovtime2", hovtime2.getText());
+            prefs.put("hovtime3", hovtime3.getText());
+            prefs.put("hovtime4", hovtime4.getText());
+            prefs.put("hovtime5", hovtime5.getText());
+            prefs.put("hovtime6", hovtime6.getText());
+            prefs.put("hovtime7", hovtime7.getText());
+            prefs.put("hovtime8", hovtime8.getText());
+            prefs.put("hovtime9", hovtime9.getText());
+            prefs.put("hovtime10", hovtime10.getText());
+            
+            prefs.put("suttime1", suttime1.getText());
+            prefs.put("suttime2", suttime2.getText());
+            prefs.put("suttime3", suttime3.getText());
+            prefs.put("suttime4", suttime4.getText());
+            prefs.put("suttime5", suttime5.getText());
+            prefs.put("suttime6", suttime6.getText());
+            prefs.put("suttime7", suttime7.getText());
+            prefs.put("suttime8", suttime8.getText());
+            prefs.put("suttime9", suttime9.getText());
+            prefs.put("suttime10", suttime10.getText());
+            
+            prefs.put("stttime1", stttime1.getText());
+            prefs.put("stttime2", stttime2.getText());
+            prefs.put("stttime3", stttime3.getText());
+            prefs.put("stttime4", stttime4.getText());
+            prefs.put("stttime5", stttime5.getText());
+            prefs.put("stttime6", stttime6.getText());
+            prefs.put("stttime7", stttime7.getText());
+            prefs.put("stttime8", stttime8.getText());
+            prefs.put("stttime9", stttime9.getText());
+            prefs.put("stttime10", stttime10.getText());
+            
+            prefs.put("stdtime1", stdtime1.getText());
+            prefs.put("stdtime2", stdtime2.getText());
+            prefs.put("stdtime3", stdtime3.getText());
+            prefs.put("stdtime4", stdtime4.getText());
+            prefs.put("stdtime5", stdtime5.getText());
+            prefs.put("stdtime6", stdtime6.getText());
+            prefs.put("stdtime7", stdtime7.getText());
+            prefs.put("stdtime8", stdtime8.getText());
+            prefs.put("stdtime9", stdtime9.getText());
+            prefs.put("stdtime10", stdtime10.getText());
+            
+            prefs.put("spvtime1", spvtime1.getText());
+            prefs.put("spvtime2", spvtime2.getText());
+            prefs.put("spvtime3", spvtime3.getText());
+            prefs.put("spvtime4", spvtime4.getText());
+            prefs.put("spvtime5", spvtime5.getText());
+            prefs.put("spvtime6", spvtime6.getText());
+            prefs.put("spvtime7", spvtime7.getText());
+            prefs.put("spvtime8", spvtime8.getText());
+            prefs.put("spvtime9", spvtime9.getText());
+            prefs.put("spvtime10", spvtime10.getText());
+            
+            prefs.put("ModelDropDown", ModelDropDown.getValue().toString());
+            prefs.put("timeofday", timeofday.getValue().toString());
+            
+            prefs.put("issovallowed", issovallowed.isSelected() ? "true" : "false");
+            prefs.put("ishovallowed", ishovallowed.isSelected() ? "true" : "false");
+            prefs.put("issovtallowed", issovtallowed.isSelected() ? "true" : "false");
+            prefs.put("issutallowed", issutallowed.isSelected() ? "true" : "false");
+            prefs.put("issttallowed", issttallowed.isSelected() ? "true" : "false");
+            prefs.put("isstdallowed", isstdallowed.isSelected() ? "true" : "false");
+            prefs.put("isspvallowed", isspvallowed.isSelected() ? "true" : "false");
+            
+            prefs.put("issovml", issovml.isSelected() ? "true" : "false");
+            prefs.put("ishovml", ishovml.isSelected() ? "true" : "false");
+            prefs.put("issovtml", issovtml.isSelected() ? "true" : "false");
+            prefs.put("issutml", issutml.isSelected() ? "true" : "false");
+            prefs.put("issovml", issovml.isSelected() ? "true" : "false");
+            prefs.put("issttml", issttml.isSelected() ? "true" : "false");
+            prefs.put("isstdml", isstdml.isSelected() ? "true" : "false");
+            prefs.put("isspvml", isspvml.isSelected() ? "true" : "false");
+            
+        }
+        /*private TextField speedtextsing,tolltextsing,corridordemand,MLNoLanes,GPNoLanes,GPLength,GpSpeed,
+             MLSpeed,GPCapacity,MLCapacity,MLLength,deadsetter,sovvhmix,hovvhmix,sovtvhmix,sutvhmix,
+             sttvhmix,stdvhmix,sphvhmix,sovpce,hovpce,sovtpce,sutpce,sttpce,stdpce,sphpce,
+             sovtoll,hovtoll,sovttoll,suttoll,stttoll,stdtoll,spvtoll,GPDensity;
+     
+     private TextField Maxtoll1,Maxtoll2,Maxtoll3,Maxtoll4,Maxtoll5,Maxtoll6,Maxtoll7,Maxtoll8,Maxtoll9,Maxtoll10;
+     private TextField MLDensity;
+     private RadioButton TollRadio,speedRadio;
+     private ComboBox ModelDropDown,timeofday;
+     private CheckBox issovallowed,ishovallowed,issovtallowed,issutallowed,issttallowed,isstdallowed,isspvallowed;
+     private CheckBox issovml,ishovml,issovtml,issutml,issttml,isstdml,isspvml;
+     private TextField sovmlshare,hovmlshare,sovtmlshare,sutmlshare,sttmlshare,stdmlshare,spvmlshare;
+     private TextField sovttime1,sovttime2,sovttime3,sovttime4,sovttime5,sovttime6,sovttime7,sovttime8,sovttime9,sovttime10;
+     private TextField sovtime1,sovtime2,sovtime3,sovtime4,sovtime5,sovtime6,sovtime7,sovtime8,sovtime9,sovtime10;
+    private TextField hovtime1,hovtime2,hovtime3,hovtime4,hovtime5,hovtime6,hovtime7,hovtime8,hovtime9,hovtime10;
+    private TextField suttime1,suttime2,suttime3,suttime4,suttime5,suttime6,suttime7,suttime8,suttime9,suttime10;
+    private TextField stttime1,stttime2,stttime3,stttime4,stttime5,stttime6,stttime7,stttime8,stttime9,stttime10;
+    private TextField stdtime1,stdtime2,stdtime3,stdtime4,stdtime5,stdtime6,stdtime7,stdtime8,stdtime9,stdtime10;
+    private TextField spvtime1,spvtime2,spvtime3,spvtime4,spvtime5,spvtime6,spvtime7,spvtime8,spvtime9,spvtime10;*/
 }
