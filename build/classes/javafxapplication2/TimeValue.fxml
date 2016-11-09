@@ -174,9 +174,9 @@
       <Button id="TimeBackButton" layoutX="705.0" layoutY="695.0" mnemonicParsing="false" onAction="#handletimeBackButton" text="Back" />
       <Button id="timeNextButton" layoutX="766.0" layoutY="695.0" mnemonicParsing="false" onAction="#handletimeNextButton" text="Next" />
       <Button id="TimeHelpButton" layoutX="896.0" layoutY="695.0" mnemonicParsing="false" onAction="#handletimeHelpButton" text="Help" />
-      <CheckBox fx:id="timesaveinput" layoutX="43.0" layoutY="700.0" mnemonicParsing="false" text="Save current input values" />
+      <CheckBox fx:id="timesaveinput" layoutX="43.0" layoutY="700.0" mnemonicParsing="false" onAction="#handlesaveinput" text="Save current input values" />
       <Button layoutX="882.0" layoutY="16.0" mnemonicParsing="false" onAction="#handlePrintButton" text="Print" />
-      <Button layoutX="826.0" layoutY="695.0" mnemonicParsing="false" text="Close" />
+      <Button fx:id="closebutton" layoutX="826.0" layoutY="695.0" mnemonicParsing="false" text="Close" />
       <Hyperlink layoutX="33.0" layoutY="381.0" onAction="#handleResultslink" text="Results">
          <font>
             <Font name="System Bold" size="18.0" />

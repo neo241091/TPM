@@ -4,11 +4,22 @@
  * and open the template in the editor.
  */
 package javafxapplication2;
+import java.util.Optional;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import java.util.prefs.*;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.stage.Modality;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  *
@@ -19,7 +30,8 @@ public class Singleton {
      public static Singleton getInstance(){
             return instance;
         }
-     private Preferences prefs;
+     private Preferences prefs = Preferences.userNodeForPackage(this.getClass());
+     private Stage mainStage;
      private TextField speedtextsing,tolltextsing,corridordemand,MLNoLanes,GPNoLanes,GPLength,GpSpeed,
              MLSpeed,GPCapacity,MLCapacity,MLLength,deadsetter,sovvhmix,hovvhmix,sovtvhmix,sutvhmix,
              sttvhmix,stdvhmix,sphvhmix,sovpce,hovpce,sovtpce,sutpce,sttpce,stdpce,sphpce,
@@ -39,6 +51,7 @@ public class Singleton {
     private TextField stttime1,stttime2,stttime3,stttime4,stttime5,stttime6,stttime7,stttime8,stttime9,stttime10;
     private TextField stdtime1,stdtime2,stdtime3,stdtime4,stdtime5,stdtime6,stdtime7,stdtime8,stdtime9,stdtime10;
     private TextField spvtime1,spvtime2,spvtime3,spvtime4,spvtime5,spvtime6,spvtime7,spvtime8,spvtime9,spvtime10;
+    private CheckBox saveInput;
      public TextField getspeedtextsing() {
             return speedtextsing;
         }
@@ -1070,180 +1083,294 @@ public class Singleton {
             return timeofday;
         }
         
+         public boolean getsaveInput() {
+            String value = prefs.get("saveinput", "");
+            if(value.equals(""))
+            {
+                return false;
+            }
+            else if(value.equals("true"))
+                return true;
+            return false;
+        }
+
+        public void setsaveInput(CheckBox saveinputval) {
+           if(saveinputval!=null)
+           {
+               prefs.put("saveinput", saveinputval.isSelected()?"true":"false");
+           }
+        }
+        
+        private void setTextFields(TextField textbox)
+        {
+            if(textbox != null)
+            {
+                prefs.put(textbox.getId(), textbox.getText());
+            }
+        }
+        
         public void Save()
         {
-            prefs = Preferences.userNodeForPackage(this.getClass());
-            prefs.put("speedtextsing", speedtextsing.getText());
-            prefs.put("tolltextsing", tolltextsing.getText());
-            prefs.put("corridordemand", corridordemand.getText());
-            prefs.put("MLNoLanes", MLNoLanes.getText());
-            prefs.put("GPNoLanes", GPNoLanes.getText());
-            prefs.put("GPLength", GPLength.getText());
-            prefs.put("GpSpeed", GpSpeed.getText());
-            prefs.put("MLSpeed", MLSpeed.getText());
-            prefs.put("GPCapacity", GPCapacity.getText());
-            prefs.put("MLCapacity", MLCapacity.getText());
-            prefs.put("MLLength", MLLength.getText());
-            prefs.put("deadsetter", deadsetter.getText());
-            prefs.put("sovvhmix", sovvhmix.getText());
-            prefs.put("hovvhmix", hovvhmix.getText());
-            prefs.put("sovtvhmix", sovtvhmix.getText());
-            prefs.put("sutvhmix", sutvhmix.getText());
-            prefs.put("sttvhmix", sttvhmix.getText());
-            prefs.put("stdvhmix", stdvhmix.getText());
-            prefs.put("sphvhmix", sphvhmix.getText());
-            prefs.put("sovpce", sovpce.getText());
-            prefs.put("hovpce", hovpce.getText());
-            prefs.put("sovtpce", sovtpce.getText());
-            prefs.put("sutpce", sutpce.getText());
-            prefs.put("sttpce", sttpce.getText());
-            prefs.put("stdpce", stdpce.getText());
-            prefs.put("sphpce", sphpce.getText());
-            prefs.put("sovtoll", sovtoll.getText());
-            prefs.put("hovtoll", hovtoll.getText());
-            prefs.put("sovttoll", sovttoll.getText());
-            prefs.put("suttoll", suttoll.getText());
-            prefs.put("stttoll", stttoll.getText());
-            prefs.put("stdtoll", stdtoll.getText());
-            prefs.put("spvtoll", spvtoll.getText());
-            prefs.put("GPDensity", GPDensity.getText());
+            setTextFields(speedtextsing);
+            setTextFields(tolltextsing);
+            setTextFields(corridordemand);
+            setTextFields(MLNoLanes);
+            setTextFields(GPNoLanes);
+            setTextFields(GPLength);
+            setTextFields(GpSpeed);
+            setTextFields(MLSpeed);
+            setTextFields(GPCapacity);
+            setTextFields(MLCapacity);
+            setTextFields(MLLength);
+            setTextFields(deadsetter);
+            setTextFields(sovvhmix);
+            setTextFields(hovvhmix);
+            setTextFields(sovtvhmix);
+            setTextFields(sutvhmix);
+            setTextFields(sttvhmix);
+            setTextFields(stdvhmix);
+            setTextFields(sphvhmix);
+            setTextFields(sovpce);
+            setTextFields(hovpce);
+            setTextFields(sovtpce);
+            setTextFields(sutpce);
+            setTextFields(sttpce);
+            setTextFields(stdpce);
+            setTextFields(sphpce);
+            setTextFields(sovtoll);
+            setTextFields(hovtoll);
+            setTextFields(sovttoll);
+            setTextFields(suttoll);
+            setTextFields(stttoll);
+            setTextFields(stdtoll);
+            setTextFields(spvtoll);
+            setTextFields(GPDensity);
             
-            prefs.put("Maxtoll1", Maxtoll1.getText());
-            prefs.put("Maxtoll2", Maxtoll2.getText());
-            prefs.put("Maxtoll3", Maxtoll3.getText());
-            prefs.put("Maxtoll4", Maxtoll4.getText());
-            prefs.put("Maxtoll5", Maxtoll5.getText());
-            prefs.put("Maxtoll6", Maxtoll6.getText());
-            prefs.put("Maxtoll7", Maxtoll7.getText());
-            prefs.put("Maxtoll8", Maxtoll8.getText());
-            prefs.put("Maxtoll9", Maxtoll9.getText());
-            prefs.put("Maxtoll10", Maxtoll10.getText());
-            prefs.put("MLDensity", MLDensity.getText());
+            setTextFields(Maxtoll1);
+            setTextFields(Maxtoll2);
+            setTextFields(Maxtoll3);
+            setTextFields(Maxtoll4);
+            setTextFields(Maxtoll5);
+            setTextFields(Maxtoll6);
+            setTextFields(Maxtoll7);
+            setTextFields(Maxtoll8);
+            setTextFields(Maxtoll9);
+            setTextFields(Maxtoll10);
+            setTextFields(MLDensity);
             
-            prefs.put("sovmlshare", sovmlshare.getText());
-            prefs.put("hovmlshare", hovmlshare.getText());
-            prefs.put("sovtmlshare", sovtmlshare.getText());
-            prefs.put("sutmlshare", sutmlshare.getText());
-            prefs.put("sttmlshare", sttmlshare.getText());
-            prefs.put("stdmlshare", stdmlshare.getText());
-            prefs.put("spvmlshare", spvmlshare.getText());
+            setTextFields(sovmlshare);
+            setTextFields(hovmlshare);
+            setTextFields(sovtmlshare);
+            setTextFields(sutmlshare);
+            setTextFields(sttmlshare);
+            setTextFields(stdmlshare);
+            setTextFields(spvmlshare);
             
+            setTextFields(sovttime1);
+            setTextFields(sovttime2);
+            setTextFields(sovttime3);
+            setTextFields(sovttime4);
+            setTextFields(sovttime5);
+            setTextFields(sovttime6);
+            setTextFields(sovttime7);
+            setTextFields(sovttime8);
+            setTextFields(sovttime9);
+            setTextFields(sovttime10);   
             
-            prefs.put("sovttime1", sovttime1.getText());
-            prefs.put("sovttime2", sovttime2.getText());
-            prefs.put("sovttime3", sovttime3.getText());
-            prefs.put("sovttime4", sovttime4.getText());
-            prefs.put("sovttime5", sovttime5.getText());
-            prefs.put("sovttime6", sovttime6.getText());
-            prefs.put("sovttime7", sovttime7.getText());
-            prefs.put("sovttime8", sovttime8.getText());
-            prefs.put("sovttime9", sovttime9.getText());
-            prefs.put("sovttime10", sovttime10.getText());
+            setTextFields(sovtime1);
+            setTextFields(sovtime2);
+            setTextFields(sovtime3);
+            setTextFields(sovtime4);
+            setTextFields(sovtime5);
+            setTextFields(sovtime6);
+            setTextFields(sovtime7);
+            setTextFields(sovtime8);
+            setTextFields(sovtime9);
+            setTextFields(sovtime10);        
             
-            prefs.put("sovtime1", sovtime1.getText());
-            prefs.put("sovtime2", sovtime2.getText());
-            prefs.put("sovtime3", sovtime3.getText());
-            prefs.put("sovtime4", sovtime4.getText());
-            prefs.put("sovtime5", sovtime5.getText());
-            prefs.put("sovtime6", sovtime6.getText());
-            prefs.put("sovtime7", sovtime7.getText());
-            prefs.put("sovtime8", sovtime8.getText());
-            prefs.put("sovtime9", sovtime9.getText());
-            prefs.put("sovtime10", sovtime10.getText());
+            setTextFields(hovtime1);
+            setTextFields(hovtime2);   
+            setTextFields(hovtime3);   
+            setTextFields(hovtime4);   
+            setTextFields(hovtime5);   
+            setTextFields(hovtime6);   
+            setTextFields(hovtime7);   
+            setTextFields(hovtime8);   
+            setTextFields(hovtime9);   
+            setTextFields(hovtime10);            
+             
+            setTextFields(suttime1);
+            setTextFields(suttime2); 
+            setTextFields(suttime3); 
+            setTextFields(suttime4); 
+            setTextFields(suttime5); 
+            setTextFields(suttime6); 
+            setTextFields(suttime7); 
+            setTextFields(suttime8); 
+            setTextFields(suttime9); 
+            setTextFields(suttime10);
             
-            prefs.put("hovtime1", hovtime1.getText());
-            prefs.put("hovtime2", hovtime2.getText());
-            prefs.put("hovtime3", hovtime3.getText());
-            prefs.put("hovtime4", hovtime4.getText());
-            prefs.put("hovtime5", hovtime5.getText());
-            prefs.put("hovtime6", hovtime6.getText());
-            prefs.put("hovtime7", hovtime7.getText());
-            prefs.put("hovtime8", hovtime8.getText());
-            prefs.put("hovtime9", hovtime9.getText());
-            prefs.put("hovtime10", hovtime10.getText());
+            setTextFields(stttime1);
+            setTextFields(stttime2);
+            setTextFields(stttime3);
+            setTextFields(stttime4);
+            setTextFields(stttime5);
+            setTextFields(stttime6);
+            setTextFields(stttime7);
+            setTextFields(stttime8);
+            setTextFields(stttime9);
+            setTextFields(stttime10);
             
-            prefs.put("suttime1", suttime1.getText());
-            prefs.put("suttime2", suttime2.getText());
-            prefs.put("suttime3", suttime3.getText());
-            prefs.put("suttime4", suttime4.getText());
-            prefs.put("suttime5", suttime5.getText());
-            prefs.put("suttime6", suttime6.getText());
-            prefs.put("suttime7", suttime7.getText());
-            prefs.put("suttime8", suttime8.getText());
-            prefs.put("suttime9", suttime9.getText());
-            prefs.put("suttime10", suttime10.getText());
+            setTextFields(stdtime1);
+            setTextFields(stdtime2);
+            setTextFields(stdtime3);
+            setTextFields(stdtime4);
+            setTextFields(stdtime5);
+            setTextFields(stdtime6);
+            setTextFields(stdtime7);
+            setTextFields(stdtime8);
+            setTextFields(stdtime9);
+            setTextFields(stdtime10);                        
             
-            prefs.put("stttime1", stttime1.getText());
-            prefs.put("stttime2", stttime2.getText());
-            prefs.put("stttime3", stttime3.getText());
-            prefs.put("stttime4", stttime4.getText());
-            prefs.put("stttime5", stttime5.getText());
-            prefs.put("stttime6", stttime6.getText());
-            prefs.put("stttime7", stttime7.getText());
-            prefs.put("stttime8", stttime8.getText());
-            prefs.put("stttime9", stttime9.getText());
-            prefs.put("stttime10", stttime10.getText());
+            setTextFields(spvtime1);
+            setTextFields(spvtime2);
+            setTextFields(spvtime3);
+            setTextFields(spvtime4);
+            setTextFields(spvtime5);
+            setTextFields(spvtime6);
+            setTextFields(spvtime7);
+            setTextFields(spvtime8);
+            setTextFields(spvtime9);
+            setTextFields(spvtime10);
             
-            prefs.put("stdtime1", stdtime1.getText());
-            prefs.put("stdtime2", stdtime2.getText());
-            prefs.put("stdtime3", stdtime3.getText());
-            prefs.put("stdtime4", stdtime4.getText());
-            prefs.put("stdtime5", stdtime5.getText());
-            prefs.put("stdtime6", stdtime6.getText());
-            prefs.put("stdtime7", stdtime7.getText());
-            prefs.put("stdtime8", stdtime8.getText());
-            prefs.put("stdtime9", stdtime9.getText());
-            prefs.put("stdtime10", stdtime10.getText());
+            setComboBoxes(ModelDropDown);
+            setComboBoxes(timeofday);
             
-            prefs.put("spvtime1", spvtime1.getText());
-            prefs.put("spvtime2", spvtime2.getText());
-            prefs.put("spvtime3", spvtime3.getText());
-            prefs.put("spvtime4", spvtime4.getText());
-            prefs.put("spvtime5", spvtime5.getText());
-            prefs.put("spvtime6", spvtime6.getText());
-            prefs.put("spvtime7", spvtime7.getText());
-            prefs.put("spvtime8", spvtime8.getText());
-            prefs.put("spvtime9", spvtime9.getText());
-            prefs.put("spvtime10", spvtime10.getText());
+            setCheckboxes(issovallowed);
+            setCheckboxes(ishovallowed);
+            setCheckboxes(issovtallowed);
+            setCheckboxes(issutallowed);
+            setCheckboxes(issttallowed);
+            setCheckboxes(isstdallowed);
+            setCheckboxes(isspvallowed);
+                
             
-            prefs.put("ModelDropDown", ModelDropDown.getValue().toString());
-            prefs.put("timeofday", timeofday.getValue().toString());
+            setCheckboxes(issovml);
+            setCheckboxes(ishovml);
+            setCheckboxes(issovtml);
+            setCheckboxes(issutml);
+            setCheckboxes(issovml);
+            setCheckboxes(issttml);
+            setCheckboxes(isstdml);
+            setCheckboxes(isspvml);
             
-            prefs.put("issovallowed", issovallowed.isSelected() ? "true" : "false");
-            prefs.put("ishovallowed", ishovallowed.isSelected() ? "true" : "false");
-            prefs.put("issovtallowed", issovtallowed.isSelected() ? "true" : "false");
-            prefs.put("issutallowed", issutallowed.isSelected() ? "true" : "false");
-            prefs.put("issttallowed", issttallowed.isSelected() ? "true" : "false");
-            prefs.put("isstdallowed", isstdallowed.isSelected() ? "true" : "false");
-            prefs.put("isspvallowed", isspvallowed.isSelected() ? "true" : "false");
+            setRadioButtons(TollRadio);
+            setRadioButtons(speedRadio);
             
-            prefs.put("issovml", issovml.isSelected() ? "true" : "false");
-            prefs.put("ishovml", ishovml.isSelected() ? "true" : "false");
-            prefs.put("issovtml", issovtml.isSelected() ? "true" : "false");
-            prefs.put("issutml", issutml.isSelected() ? "true" : "false");
-            prefs.put("issovml", issovml.isSelected() ? "true" : "false");
-            prefs.put("issttml", issttml.isSelected() ? "true" : "false");
-            prefs.put("isstdml", isstdml.isSelected() ? "true" : "false");
-            prefs.put("isspvml", isspvml.isSelected() ? "true" : "false");
-            
+        }       
+
+    private void setComboBoxes(ComboBox combobox) {
+        if(combobox!=null)
+        {
+            prefs.put(combobox.getId(), combobox.getValue().toString());
         }
-        /*private TextField speedtextsing,tolltextsing,corridordemand,MLNoLanes,GPNoLanes,GPLength,GpSpeed,
-             MLSpeed,GPCapacity,MLCapacity,MLLength,deadsetter,sovvhmix,hovvhmix,sovtvhmix,sutvhmix,
-             sttvhmix,stdvhmix,sphvhmix,sovpce,hovpce,sovtpce,sutpce,sttpce,stdpce,sphpce,
-             sovtoll,hovtoll,sovttoll,suttoll,stttoll,stdtoll,spvtoll,GPDensity;
-     
-     private TextField Maxtoll1,Maxtoll2,Maxtoll3,Maxtoll4,Maxtoll5,Maxtoll6,Maxtoll7,Maxtoll8,Maxtoll9,Maxtoll10;
-     private TextField MLDensity;
-     private RadioButton TollRadio,speedRadio;
-     private ComboBox ModelDropDown,timeofday;
-     private CheckBox issovallowed,ishovallowed,issovtallowed,issutallowed,issttallowed,isstdallowed,isspvallowed;
-     private CheckBox issovml,ishovml,issovtml,issutml,issttml,isstdml,isspvml;
-     private TextField sovmlshare,hovmlshare,sovtmlshare,sutmlshare,sttmlshare,stdmlshare,spvmlshare;
-     private TextField sovttime1,sovttime2,sovttime3,sovttime4,sovttime5,sovttime6,sovttime7,sovttime8,sovttime9,sovttime10;
-     private TextField sovtime1,sovtime2,sovtime3,sovtime4,sovtime5,sovtime6,sovtime7,sovtime8,sovtime9,sovtime10;
-    private TextField hovtime1,hovtime2,hovtime3,hovtime4,hovtime5,hovtime6,hovtime7,hovtime8,hovtime9,hovtime10;
-    private TextField suttime1,suttime2,suttime3,suttime4,suttime5,suttime6,suttime7,suttime8,suttime9,suttime10;
-    private TextField stttime1,stttime2,stttime3,stttime4,stttime5,stttime6,stttime7,stttime8,stttime9,stttime10;
-    private TextField stdtime1,stdtime2,stdtime3,stdtime4,stdtime5,stdtime6,stdtime7,stdtime8,stdtime9,stdtime10;
-    private TextField spvtime1,spvtime2,spvtime3,spvtime4,spvtime5,spvtime6,spvtime7,spvtime8,spvtime9,spvtime10;*/
+    }
+
+    private void setCheckboxes(CheckBox checkbox) {
+        if(checkbox!=null)
+        {
+            prefs.put(checkbox.getId(), checkbox.isSelected() ? "true" : "false");
+        }
+    }
+    
+    public void getTextFields(TextField textfield)
+    {
+        String value = prefs.get(textfield.getId(), "");
+        if(value.equals(""))
+        {
+            textfield.setText(textfield.getText());
+        }
+        else 
+             textfield.setText(value);
+    }
+    
+    public void getCheckboxes(CheckBox checkbox)
+    {
+        String value = prefs.get(checkbox.getId(), "");
+        if(value.equals(""))
+        {
+            checkbox.setSelected(checkbox.isSelected());
+        }
+        else checkbox.setSelected(value.equals("true"));
+    }
+    
+    public void getComboBoxes(ComboBox combo)
+    {
+        String value = prefs.get(combo.getId(), "");
+        if(value.equals(""))
+        {
+            combo.setValue(combo.getValue().toString());
+        }
+        else combo.setValue(value);
+    }
+    
+    private void setRadioButtons(RadioButton radio)
+    {
+        if(radio!=null)
+        {
+            prefs.put(radio.getId(), radio.isSelected() ? "true" : "false");
+        }
+    }
+    
+    public void getRadioButtons(RadioButton radio)
+    {
+        String value = prefs.get(radio.getId(), "");
+        if(value.equals(""))
+        {
+            radio.setSelected(radio.isSelected());
+        }
+        else radio.setSelected(value.equals("true"));
+    }
+    
+    public void setStage(Stage stage)
+    {
+        mainStage = stage;
+    }
+    
+    public Stage getStage()
+    {
+        return mainStage;
+    }
+    
+    
+    EventHandler<WindowEvent> confirmCloseEventHandler = event -> {
+        Alert closeConfirmation = new Alert(
+                Alert.AlertType.CONFIRMATION,
+                "Are you sure you want to exit?"
+        );
+        Button exitButton = (Button) closeConfirmation.getDialogPane().lookupButton(
+                ButtonType.OK
+        );
+        exitButton.setText("Exit");
+        closeConfirmation.setHeaderText("Confirm Exit");
+        closeConfirmation.initModality(Modality.APPLICATION_MODAL);
+        closeConfirmation.initOwner(mainStage);
+
+        // normally, you would just use the default alert positioning,
+        // but for this simple sample the main stage is small,
+        // so explicitly position the alert so that the main window can still be seen.
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        
+        closeConfirmation.setX((primScreenBounds.getWidth() - mainStage.getWidth()) / 2);
+        closeConfirmation.setY((primScreenBounds.getHeight() - mainStage.getHeight()) / 2);
+
+        Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
+        if (!ButtonType.OK.equals(closeResponse.get())) {
+            event.consume();
+        }
+        if(getsaveInput())
+        {
+            Save();
+        }
+    };
 }

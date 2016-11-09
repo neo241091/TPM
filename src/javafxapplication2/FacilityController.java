@@ -13,18 +13,21 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * FXML Controller class
@@ -42,10 +45,38 @@ public class FacilityController implements Initializable {
     private TextField MLNoLanes,GPNoLanes,GpSpeed,GPLength,MLSpeed,GPCapacity,MLCapacity,MLLength,MLDensity,GPDensity;
     @FXML
     private Label GPDensitylabel,MLDensitylabel,GPDensitylabel1,MLDensitylabel2;
+    @FXML
+    private CheckBox facilitysaveinput;
+    
+    @FXML
+    private Button closebutton;
             
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO        
+        Stage stage = Singleton.getInstance().getStage();
+         closebutton.setOnAction(event ->
+                stage.fireEvent(
+                        new WindowEvent(
+                                stage,
+                                WindowEvent.WINDOW_CLOSE_REQUEST
+                        )
+                )
+        );
+         
+        Singleton.getInstance().getComboBoxes(ModelDropDown);
+        Singleton.getInstance().getTextFields(MLNoLanes);
+        Singleton.getInstance().getTextFields(GPNoLanes);
+        Singleton.getInstance().getTextFields(GpSpeed);
+        Singleton.getInstance().getTextFields(GPLength);
+        Singleton.getInstance().getTextFields(GPCapacity);
+        Singleton.getInstance().getTextFields(MLCapacity);
+        Singleton.getInstance().getTextFields(MLLength);
+        Singleton.getInstance().getTextFields(MLDensity);
+        Singleton.getInstance().getTextFields(GPDensity);
+        
+        
+        
         Singleton.getInstance().setModelDropDown(ModelDropDown);
         Singleton.getInstance().setMLNoLanes(MLNoLanes);
         Singleton.getInstance().setGPNoLanes(GPNoLanes);
@@ -75,6 +106,7 @@ public class FacilityController implements Initializable {
             GPDensitylabel1.setVisible(true);             
             MLDensitylabel2.setVisible(true);
         }
+        facilitysaveinput.setSelected(Singleton.getInstance().getsaveInput());
     }    
 
     @FXML
@@ -204,6 +236,12 @@ public class FacilityController implements Initializable {
             }
         }
         
+    }
+    
+    @FXML
+    private void handleSaveinput(ActionEvent event)
+    {
+        Singleton.getInstance().setsaveInput(facilitysaveinput);
     }
    
 }

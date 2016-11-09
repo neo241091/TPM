@@ -100,9 +100,9 @@
          </tabs>
       </TabPane>
       <Button fx:id="FacilityNextButton" layoutX="751.0" layoutY="682.0" mnemonicParsing="false" onAction="#handleFacilityNextButtonAction" text="Next" />
-      <Button layoutX="819.0" layoutY="682.0" mnemonicParsing="false" onAction="#handleFacilityclose" text="Close" />
+      <Button fx:id="closebutton" layoutX="819.0" layoutY="682.0" mnemonicParsing="false" onAction="#handleFacilityclose" text="Close" />
       <Button layoutX="893.0" layoutY="682.0" mnemonicParsing="false" text="Help" />
-      <CheckBox fx:id="facilitysaveinput" layoutX="24.0" layoutY="687.0" mnemonicParsing="false" text="Save current input values" />
+      <CheckBox fx:id="facilitysaveinput" layoutX="24.0" layoutY="687.0" mnemonicParsing="false" onAction="#handleSaveinput" text="Save current input values" />
       <Button layoutX="893.0" layoutY="17.0" mnemonicParsing="false" onAction="#handlePrintButton" text="Print" />
       <Hyperlink layoutX="37.0" layoutY="101.0" onAction="#handleFacilitylink" prefHeight="29.0" prefWidth="119.0" text="Facility Info">
          <font>

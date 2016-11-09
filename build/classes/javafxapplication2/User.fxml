@@ -223,9 +223,9 @@
       <Button id="userBackutton" layoutX="715.0" layoutY="657.0" mnemonicParsing="false" onAction="#handleuserBackbutton" text="Back" />
       <Button id="UserNextButton" layoutX="776.0" layoutY="657.0" mnemonicParsing="false" onAction="#handleuserNextbutton" text="Next" />
       <Button layoutX="908.0" layoutY="657.0" mnemonicParsing="false" text="Help" />
-      <CheckBox fx:id="usersaveinput" layoutX="44.0" layoutY="662.0" mnemonicParsing="false" text="Save current input values" />
+      <CheckBox fx:id="usersaveinput" layoutX="44.0" layoutY="662.0" mnemonicParsing="false" onAction="#handlesaveinput" text="Save current input values" />
       <Button layoutX="908.0" layoutY="14.0" mnemonicParsing="false" onAction="#handlePrintButton" text="Print" />
-      <Button layoutX="843.0" layoutY="657.0" mnemonicParsing="false" onAction="#handleuserclose" text="Close" />
+      <Button fx:id="closebutton" layoutX="843.0" layoutY="657.0" mnemonicParsing="false" onAction="#handleuserclose" text="Close" />
       <Hyperlink layoutX="35.0" layoutY="380.0" onAction="#handleResultslink" text="Results">
          <font>
             <Font name="System Bold" size="18.0" />

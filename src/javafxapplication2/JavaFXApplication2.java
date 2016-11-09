@@ -28,11 +28,10 @@ import javafx.stage.WindowEvent;
  * @author saravanakumar
  */
 public class JavaFXApplication2 extends Application {
-    private Stage mainStage;
     @Override
     public void start(Stage stage) throws Exception {
-        this.mainStage = stage;
-        stage.setOnCloseRequest(confirmCloseEventHandler);
+        Singleton.getInstance().setStage(stage);
+        stage.setOnCloseRequest(Singleton.getInstance().confirmCloseEventHandler);
         Button closeButton = new Button("Close Application");
         closeButton.setOnAction(event ->
                 stage.fireEvent(
@@ -53,32 +52,6 @@ public class JavaFXApplication2 extends Application {
         stage.show();
     }
     
-    private EventHandler<WindowEvent> confirmCloseEventHandler = event -> {
-        Alert closeConfirmation = new Alert(
-                Alert.AlertType.CONFIRMATION,
-                "Are you sure you want to exit?"
-        );
-        Button exitButton = (Button) closeConfirmation.getDialogPane().lookupButton(
-                ButtonType.OK
-        );
-        exitButton.setText("Exit");
-        closeConfirmation.setHeaderText("Confirm Exit");
-        closeConfirmation.initModality(Modality.APPLICATION_MODAL);
-        closeConfirmation.initOwner(mainStage);
-
-        // normally, you would just use the default alert positioning,
-        // but for this simple sample the main stage is small,
-        // so explicitly position the alert so that the main window can still be seen.
-        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-        
-        closeConfirmation.setX((primScreenBounds.getWidth() - mainStage.getWidth()) / 2);
-        closeConfirmation.setY((primScreenBounds.getHeight() - mainStage.getHeight()) / 2);
-
-        Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
-        if (!ButtonType.OK.equals(closeResponse.get())) {
-            event.consume();
-        }
-    };
 
     /**
      * @param args the command line arguments

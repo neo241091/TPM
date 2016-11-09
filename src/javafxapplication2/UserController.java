@@ -29,6 +29,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * FXML Controller class
@@ -51,17 +52,61 @@ public class UserController implements Initializable {
     @FXML
     private CheckBox issovallowed,ishovallowed,issovtallowed,issutallowed,issttallowed,isstdallowed,isspvallowed;    
     @FXML
-    private CheckBox issovml,ishovml,issovtml,issutml,issttml,isstdml,isspvml;
+    private CheckBox issovml,ishovml,issovtml,issutml,issttml,isstdml,isspvml,usersaveinput;
     
     @FXML
     private ComboBox timeofday;
+    
+    @FXML
+    private Button closebutton;
     
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        Stage stage = Singleton.getInstance().getStage();
+         closebutton.setOnAction(event ->
+                stage.fireEvent(
+                        new WindowEvent(
+                                stage,
+                                WindowEvent.WINDOW_CLOSE_REQUEST
+                        )
+                )
+        );
+         
+        Singleton.getInstance().getTextFields(corridordemand);
+        Singleton.getInstance().getTextFields(deadsetter);
+        Singleton.getInstance().getTextFields(sovvhmix);
+        Singleton.getInstance().getTextFields(hovvhmix);
+        Singleton.getInstance().getTextFields(sovtvhmix);
+        Singleton.getInstance().getTextFields(sutvhmix);
+        Singleton.getInstance().getTextFields(sttvhmix);
+        Singleton.getInstance().getTextFields(stdvhmix);
+        Singleton.getInstance().getTextFields(sphvhmix);
+        Singleton.getInstance().getTextFields(sovpce);
+        Singleton.getInstance().getTextFields(hovpce);
+        Singleton.getInstance().getTextFields(sovtpce);
+        Singleton.getInstance().getTextFields(sutpce);
+        Singleton.getInstance().getTextFields(sttpce);
+        Singleton.getInstance().getTextFields(stdpce);
+        Singleton.getInstance().getTextFields(sphpce);
+        Singleton.getInstance().getTextFields(sovtoll);
+        Singleton.getInstance().getTextFields(hovtoll);
+        Singleton.getInstance().getTextFields(sovttoll);
+        Singleton.getInstance().getTextFields(suttoll);
+        Singleton.getInstance().getTextFields(stttoll);
+        Singleton.getInstance().getTextFields(stdtoll);
+        Singleton.getInstance().getTextFields(spvtoll);
+        
+        Singleton.getInstance().getTextFields(sovmlshare);
+        Singleton.getInstance().getTextFields(hovmlshare);
+        Singleton.getInstance().getTextFields(sovtmlshare);
+        Singleton.getInstance().getTextFields(sutmlshare);
+        Singleton.getInstance().getTextFields(sttmlshare);
+        Singleton.getInstance().getTextFields(stdmlshare);
+        Singleton.getInstance().getTextFields(spvmlshare);
+         
         Singleton.getInstance().setcorridordemand(corridordemand);
         Singleton.getInstance().setdeadsetter(deadsetter);
         Singleton.getInstance().setsovvhmix(sovvhmix);
@@ -116,6 +161,26 @@ public class UserController implements Initializable {
         handlestdallowed(new ActionEvent());
         handlespvallowed(new ActionEvent());
         handlesttallowed(new ActionEvent());
+        
+        Singleton.getInstance().getCheckboxes(issovml);
+        Singleton.getInstance().getCheckboxes(ishovml);
+        Singleton.getInstance().getCheckboxes(issovtml);
+        Singleton.getInstance().getCheckboxes(issutml);
+        Singleton.getInstance().getCheckboxes(issovml);
+        Singleton.getInstance().getCheckboxes(issttml);
+        Singleton.getInstance().getCheckboxes(isstdml);
+        Singleton.getInstance().getCheckboxes(isspvml);
+        
+        Singleton.getInstance().getCheckboxes(issovallowed);
+        Singleton.getInstance().getCheckboxes(ishovallowed);
+        Singleton.getInstance().getCheckboxes(issovtallowed);
+        Singleton.getInstance().getCheckboxes(issutallowed);
+        Singleton.getInstance().getCheckboxes(issttallowed);
+        Singleton.getInstance().getCheckboxes(isstdallowed);
+        Singleton.getInstance().getCheckboxes(isspvallowed);
+        
+        Singleton.getInstance().getComboBoxes(timeofday);
+        usersaveinput.setSelected(Singleton.getInstance().getsaveInput());
     }    
     
     @FXML
@@ -423,5 +488,11 @@ public class UserController implements Initializable {
             }
         }
         
+    }
+    
+     @FXML
+    private void handlesaveinput(ActionEvent event)
+    {
+        Singleton.getInstance().setsaveInput(usersaveinput);
     }
 }

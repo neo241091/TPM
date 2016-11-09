@@ -21,9 +21,9 @@
          </font>
       </Label>
       <Button layoutX="925.0" layoutY="633.0" mnemonicParsing="false" onAction="#handleresulthelp" text="Help" />
-      <Button layoutX="856.0" layoutY="633.0" mnemonicParsing="false" onAction="#handleresultclose" text="Close" />
+      <Button fx:id="closebutton" layoutX="856.0" layoutY="633.0" mnemonicParsing="false" onAction="#handleresultclose" text="Close" />
       <Button layoutX="794.0" layoutY="633.0" mnemonicParsing="false" onAction="#handleresultback" text="Back" />
-      <CheckBox fx:id="resultsaveinput" layoutX="39.0" layoutY="638.0" mnemonicParsing="false" text="Save current input values" />
+      <CheckBox fx:id="resultsaveinput" layoutX="39.0" layoutY="638.0" mnemonicParsing="false" onAction="#handlesaveinput" text="Save current input values" />
       <Button layoutX="912.0" layoutY="27.0" mnemonicParsing="false" onAction="#handlePrintButton" text="Print" />
       <Button layoutX="778.0" layoutY="27.0" mnemonicParsing="false" onAction="#handleExportButton" text="Export to Excel" />
       <WebView fx:id="webengine" layoutX="171.0" layoutY="68.0" prefHeight="539.0" prefWidth="709.0" />

@@ -21,11 +21,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
 import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * FXML Controller class
@@ -56,12 +58,27 @@ public class TimeValueController implements Initializable {
       
       @FXML
     private TextField spvtime1,spvtime2,spvtime3,spvtime4,spvtime5,spvtime6,spvtime7,spvtime8,spvtime9,spvtime10;
+      
+      @FXML
+      private CheckBox timesaveinput;
+      
+      @FXML
+      private Button closebutton;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        Stage stage = Singleton.getInstance().getStage();
+         closebutton.setOnAction(event ->
+                stage.fireEvent(
+                        new WindowEvent(
+                                stage,
+                                WindowEvent.WINDOW_CLOSE_REQUEST
+                        )
+                )
+        );    
         Maxtoll9.textProperty().addListener((observable, oldValue, newValue) -> tollListener(newValue));
         Maxtoll8.textProperty().addListener((observable, oldValue, newValue) -> tollListener(newValue));
         sovtime1.textProperty().addListener((observable, oldValue, newValue) -> sovtimeListener(newValue));
@@ -127,6 +144,97 @@ public class TimeValueController implements Initializable {
         spvtime7.textProperty().addListener((observable, oldValue, newValue) -> spvtimeListener(newValue));
         spvtime8.textProperty().addListener((observable, oldValue, newValue) -> spvtimeListener(newValue));
         spvtime9.textProperty().addListener((observable, oldValue, newValue) -> spvtimeListener(newValue));
+        
+        Singleton.getInstance().getTextFields(Maxtoll1);
+        Singleton.getInstance().getTextFields(Maxtoll2);
+        Singleton.getInstance().getTextFields(Maxtoll3);
+        Singleton.getInstance().getTextFields(Maxtoll4);
+        Singleton.getInstance().getTextFields(Maxtoll5);
+        Singleton.getInstance().getTextFields(Maxtoll6);
+        Singleton.getInstance().getTextFields(Maxtoll7);
+        Singleton.getInstance().getTextFields(Maxtoll8);
+        Singleton.getInstance().getTextFields(Maxtoll9);
+        Singleton.getInstance().getTextFields(Maxtoll10);
+        
+        Singleton.getInstance().getTextFields(sovtime1);
+        Singleton.getInstance().getTextFields(sovtime2);
+        Singleton.getInstance().getTextFields(sovtime3);
+        Singleton.getInstance().getTextFields(sovtime4);
+        Singleton.getInstance().getTextFields(sovtime5);
+        Singleton.getInstance().getTextFields(sovtime6);
+        Singleton.getInstance().getTextFields(sovtime7);
+        Singleton.getInstance().getTextFields(sovtime8);
+        Singleton.getInstance().getTextFields(sovtime9);
+        Singleton.getInstance().getTextFields(sovtime10);
+        
+        Singleton.getInstance().getTextFields(hovtime1);
+        Singleton.getInstance().getTextFields(hovtime2);
+        Singleton.getInstance().getTextFields(hovtime3);
+        Singleton.getInstance().getTextFields(hovtime4);
+        Singleton.getInstance().getTextFields(hovtime5);
+        Singleton.getInstance().getTextFields(hovtime6);
+        Singleton.getInstance().getTextFields(hovtime7);
+        Singleton.getInstance().getTextFields(hovtime8);
+        Singleton.getInstance().getTextFields(hovtime9);
+        Singleton.getInstance().getTextFields(hovtime10);
+        
+        Singleton.getInstance().getTextFields(sovttime1);
+        Singleton.getInstance().getTextFields(sovttime2);
+        Singleton.getInstance().getTextFields(sovttime3);
+        Singleton.getInstance().getTextFields(sovttime4);
+        Singleton.getInstance().getTextFields(sovttime5);
+        Singleton.getInstance().getTextFields(sovttime6);
+        Singleton.getInstance().getTextFields(sovttime7);
+        Singleton.getInstance().getTextFields(sovttime8);
+        Singleton.getInstance().getTextFields(sovttime9);
+        Singleton.getInstance().getTextFields(sovttime10);
+        
+        Singleton.getInstance().getTextFields(suttime1);
+        Singleton.getInstance().getTextFields(suttime2);
+        Singleton.getInstance().getTextFields(suttime3);
+        Singleton.getInstance().getTextFields(suttime4);
+        Singleton.getInstance().getTextFields(suttime5);
+        Singleton.getInstance().getTextFields(suttime6);
+        Singleton.getInstance().getTextFields(suttime7);
+        Singleton.getInstance().getTextFields(suttime8);
+        Singleton.getInstance().getTextFields(suttime9);
+        Singleton.getInstance().getTextFields(suttime10);
+        
+        Singleton.getInstance().getTextFields(stttime1);
+        Singleton.getInstance().getTextFields(stttime2);
+        Singleton.getInstance().getTextFields(stttime3);
+        Singleton.getInstance().getTextFields(stttime4);
+        Singleton.getInstance().getTextFields(stttime5);
+        Singleton.getInstance().getTextFields(stttime6);
+        Singleton.getInstance().getTextFields(stttime7);
+        Singleton.getInstance().getTextFields(stttime8);
+        Singleton.getInstance().getTextFields(stttime9);
+        Singleton.getInstance().getTextFields(stttime10);
+        
+        Singleton.getInstance().getTextFields(stdtime1);
+        Singleton.getInstance().getTextFields(stdtime2);
+        Singleton.getInstance().getTextFields(stdtime3);
+        Singleton.getInstance().getTextFields(stdtime4);
+        Singleton.getInstance().getTextFields(stdtime5);
+        Singleton.getInstance().getTextFields(stdtime6);
+        Singleton.getInstance().getTextFields(stdtime7);
+        Singleton.getInstance().getTextFields(stdtime8);
+        Singleton.getInstance().getTextFields(stdtime9);
+        Singleton.getInstance().getTextFields(stdtime10);
+        
+        Singleton.getInstance().getTextFields(spvtime1);
+        Singleton.getInstance().getTextFields(spvtime2);
+        Singleton.getInstance().getTextFields(spvtime3);
+        Singleton.getInstance().getTextFields(spvtime4);
+        Singleton.getInstance().getTextFields(spvtime5);
+        Singleton.getInstance().getTextFields(spvtime6);
+        Singleton.getInstance().getTextFields(spvtime7);
+        Singleton.getInstance().getTextFields(spvtime8);
+        Singleton.getInstance().getTextFields(spvtime9);
+        Singleton.getInstance().getTextFields(spvtime10);
+        
+        
+        
         ComboBox timeday = Singleton.getInstance().gettimeofday();
         if(timeday.getValue().equals(" "))
         {
@@ -264,6 +372,7 @@ public class TimeValueController implements Initializable {
         Singleton.getInstance().setspvtime10(spvtime10);
         
         
+        timesaveinput.setSelected(Singleton.getInstance().getsaveInput());
         
     }    
     
@@ -574,6 +683,12 @@ public class TimeValueController implements Initializable {
         Maxtoll7.setText(twoDForm.format(tolls[6]));
         Maxtoll8.setText(twoDForm.format(tolls[7]));
         Maxtoll9.setText(twoDForm.format(tolls[8]));
+    }
+    
+    @FXML
+    private void handlesaveinput(ActionEvent event)
+    {
+        Singleton.getInstance().setsaveInput(timesaveinput);
     }
     
 }

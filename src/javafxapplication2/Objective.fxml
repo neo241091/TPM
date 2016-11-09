@@ -29,7 +29,7 @@
       <Label layoutX="376.0" layoutY="168.0" text="\$ / mile" />
       <Label layoutX="376.0" layoutY="278.0" text="miles/hr" />
       <Button layoutX="904.0" layoutY="645.0" mnemonicParsing="false" text="Help" />
-      <Button layoutX="839.0" layoutY="645.0" mnemonicParsing="false" onAction="#handleobjectiveclose" text="Close" />
+      <Button fx:id="closebutton" layoutX="839.0" layoutY="645.0" mnemonicParsing="false" onAction="#handleobjectiveclose" text="Close" />
       <Button layoutX="774.0" layoutY="645.0" mnemonicParsing="false" onAction="#handleobjectivenext" text="Next" />
       <Button layoutX="709.0" layoutY="645.0" mnemonicParsing="false" onAction="#handleObjectiveBack" text="Back" />
       <Button layoutX="904.0" layoutY="32.0" mnemonicParsing="false" onAction="#handlePrintButton" text="Print" />
@@ -58,6 +58,6 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Hyperlink>
-      <CheckBox fx:id="objectivesaveinput" layoutX="54.0" layoutY="672.0" mnemonicParsing="false" text="Save current input values" />
+      <CheckBox fx:id="objectivesaveinput" layoutX="54.0" layoutY="672.0" mnemonicParsing="false" onAction="#handleSaveinput" text="Save current input values" />
    </children>
 </AnchorPane>

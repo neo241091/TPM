@@ -5,6 +5,7 @@
  */
 package javafxapplication2;
 
+import java.awt.Checkbox;
 import java.awt.image.BufferedImage;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
@@ -19,11 +20,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * FXML Controller class
@@ -36,17 +39,36 @@ public class ObjectiveController implements Initializable {
     private RadioButton TollRadio,speedRadio;
     @FXML
     private TextField speedtext,tolltext;
-    
+    @FXML
+    private CheckBox objectivesaveinput;
+    @FXML
+    private Button closebutton;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        Stage stage = Singleton.getInstance().getStage();
+         closebutton.setOnAction(event ->
+                stage.fireEvent(
+                        new WindowEvent(
+                                stage,
+                                WindowEvent.WINDOW_CLOSE_REQUEST
+                        )
+                )
+        );
+         
+        Singleton.getInstance().getTextFields(tolltext);
+        Singleton.getInstance().getTextFields(speedtext);
+        Singleton.getInstance().getRadioButtons(TollRadio);
+        Singleton.getInstance().getRadioButtons(speedRadio);
+        
         Singleton.getInstance().setspeedtextsing(speedtext);
         Singleton.getInstance().settolltextsing(tolltext);
         Singleton.getInstance().setspeedradio(speedRadio);
         Singleton.getInstance().settollradio(TollRadio);
+        objectivesaveinput.setSelected(Singleton.getInstance().getsaveInput());
     }    
 
     @FXML
@@ -190,6 +212,12 @@ public class ObjectiveController implements Initializable {
             }
         }
         
+    }
+    
+    @FXML
+    private void handleSaveinput(ActionEvent event)
+    {
+        Singleton.getInstance().setsaveInput(objectivesaveinput);
     }
     
 }

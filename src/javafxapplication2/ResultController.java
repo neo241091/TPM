@@ -25,6 +25,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.RadioButton;
@@ -33,6 +34,7 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * FXML Controller class
@@ -41,12 +43,18 @@ import javafx.stage.Stage;
  */
 public class ResultController implements Initializable {
 
+    
+    @FXML
+    private CheckBox resultsaveinput;
     /**
      * Initializes the controller class.
      */
     DecimalFormat f = new DecimalFormat("##.00");
     @FXML 
     private WebView webengine;
+    
+    @FXML 
+    private Button closebutton;
     
     Lane FinalVolume = new Lane();
     Lane FinalSpeed = new Lane();
@@ -832,7 +840,16 @@ public class ResultController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        Stage stage = Singleton.getInstance().getStage();
+         closebutton.setOnAction(event ->
+                stage.fireEvent(
+                        new WindowEvent(
+                                stage,
+                                WindowEvent.WINDOW_CLOSE_REQUEST
+                        )
+                )
+        );
+        resultsaveinput.setSelected(Singleton.getInstance().getsaveInput());
         RegenerateData();
     } 
     
@@ -4924,6 +4941,10 @@ public class ResultController implements Initializable {
         webengine.getEngine().print(printJob);
     }
 
-
+    @FXML
+    private void handlesaveinput(ActionEvent event)
+    {
+        Singleton.getInstance().setsaveInput(resultsaveinput);
+    }
     
 }
